@@ -1,8 +1,7 @@
 ---
 import { storyblokEditable } from '@storyblok/astro'
 import RichText from './utils/RichText.astro'
-import cloneDeep from 'clone-deep'
-
+import NetlifyImage from './utils/NetlifyImage.astro'
 const { blok } = Astro.props
 ---
 
@@ -21,7 +20,7 @@ const { blok } = Astro.props
   blok.layout === 'center' && blok.image && (
     <div
       class="hero min-h-screen"
-      style={`background-image: url(${blok.image.filename});`}
+      style={`background-image: url(${Astro.site + '.netlify/images/' + blok.image.filename});`}
       {...storyblokEditable(blok)}>
       <div class="hero-overlay" />
       <div class="hero-content text-neutral-content text-center">
