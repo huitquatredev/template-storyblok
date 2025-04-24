@@ -1,0 +1,25 @@
+---
+import { RichTextSchema, renderRichText } from '@storyblok/astro'
+import cloneDeep from 'clone-deep'
+import toUrl from '../../utils/toUrl'
+
+const { content } = Astro.props
+
+const mySchema = cloneDeep(RichTextSchema)
+const renderedRichText = renderRichText(content, {
+  schema: mySchema,
+  resolver: (component, blok) => {
+    // console.log(blok)
+    switch (component) {
+      case 'btn':
+        return `<a class="btn ${blok.couleur} ${blok.taille}" href="${toUrl(blok.lien.url) || (blok.lien.story.url.startsWith('/') ? blok.lien.story.url : '/' + blok.lien.story.url)}">${blok.texte}</a>`
+      default:
+        return `Component ${component} not found`
+    }
+  }
+})
+---
+
+<div class="prose xl:prose-xl">
+  <Fragment set:html={renderedRichText} />
+</div>

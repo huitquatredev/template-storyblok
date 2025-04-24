@@ -1,0 +1,39 @@
+---
+import { useStoryblokApi } from '@storyblok/astro'
+import StoryblokComponent from '@storyblok/astro/StoryblokComponent.astro'
+import BaseLayout from '../layout/BaseLayout.astro'
+import parseUrl from '../utils/parseUrl'
+import isPreview from '../utils/isPreview'
+import generateStaticPaths from '../utils/generateStaticPaths'
+
+export async function getStaticPaths() {
+  //We have moved all the code to a generateStaticPaths() function.
+  return await generateStaticPaths()
+}
+
+const params = Astro.params
+let props = isPreview() ? parseUrl(params?.slug) : Astro.props
+const { slug, language, langSwitch } = props
+const storyblokApi = useStoryblokApi()
+
+const { data } = await storyblokApi.get(`cdn/stories/${slug === undefined ? 'home' : slug}`, {
+  version: isPreview() ? 'draft' : 'published',
+  language,
+  resolve_links: 'url'
+})
+
+const story = data.story
+
+// console.log(story)
+---
+
+<BaseLayout
+  title={story.content.title}
+  description={story.content.description}
+  canonical={story.content.canonical?.story?.url}
+  robots={story.content.robots}
+  ogImage={story.content.ogImage?.filename}
+  ogImageAlt={story.content.ogImageAlt}
+  schema={story.content.schema}>
+  <StoryblokComponent language={language} blok={story.content} />
+</BaseLayout>

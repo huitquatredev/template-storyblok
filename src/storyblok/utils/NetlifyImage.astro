@@ -1,0 +1,68 @@
+---
+// TODO : check if Netlify Images is working
+
+import probe from 'probe-image-size'
+
+const origin = Astro.url.origin
+
+const { src, alt, sizes = '100vw', class: classList, loading = 'lazy', noremote = false } = Astro.props
+
+let url300, url723, url1080, url1560, url1920, url2048, newUrl, width, height, srcset
+
+if (noremote) {
+  newUrl = src
+} else if (src) {
+  newUrl = new URL('.netlify/images', Astro.site)
+  newUrl.searchParams.set('url', src)
+
+  let meta = await probe(src)
+  width = meta.width
+  height = meta.height
+
+  let urlw = new URL(newUrl)
+  urlw.searchParams.set('w', '300')
+  url300 = urlw.href
+  srcset = url300 + ' 300w'
+  if (width > 723) {
+    urlw.searchParams.set('w', '723')
+    url723 = urlw.href
+    srcset += ', ' + url723 + ' 723w'
+  }
+  if (width > 1080) {
+    urlw.searchParams.set('w', '1080')
+    url1080 = urlw.href
+    srcset += ', ' + url1080 + ' 1080w'
+  }
+  if (width > 1560) {
+    urlw.searchParams.set('w', '1560')
+    url1560 = urlw.href
+    srcset += ', ' + url1560 + ' 1560w'
+  }
+  if (width > 1920) {
+    urlw.searchParams.set('w', '1920')
+    url1920 = urlw.href
+    srcset += ', ' + url1920 + ' 1920w'
+  }
+  if (width > 2048) {
+    urlw.searchParams.set('w', '2048')
+    url2048 = urlw.href
+    srcset += ', ' + url2048 + ' 2048w'
+  }
+}
+---
+
+{noremote && <img src={newUrl} alt={alt} class={classList} loading={loading} />}
+{
+  !noremote && src && (
+    <img
+      srcset={srcset}
+      sizes={sizes}
+      src={newUrl.href}
+      alt={alt}
+      class={classList}
+      width={width}
+      height={height}
+      loading={loading}
+    />
+  )
+}

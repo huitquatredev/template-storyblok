@@ -1,0 +1,8 @@
+---
+const { tag, classlist, content } = Astro.props
+const Tag = tag || 'p'
+---
+
+<Tag class={classlist}>
+  {content}
+</Tag>

@@ -1,0 +1,210 @@
+---
+// TODO : proxy the supabase GET request to netlify function to hide Supabase key
+
+function formatUrl(url) {
+  //Add https:// if missing
+  if (!/^https?:\/\//i.test(url)) {
+    url = 'https://' + url
+  }
+  //Add trailing slash if missing
+  if (!/\/$/.test(url)) {
+    url = url + '/'
+  }
+  return url
+}
+
+let url = formatUrl(Astro.url.href)
+---
+
+<div id="swagscore" class="border-2 border-neutral-content w-fit max-w-full px-2 py-0.5 rounded-2xl m-2">
+  <div class="font-bold flex gap-1 justify-center items-center">
+    SWAGscore <a href="#" class="inline align-middle" aria-label="info">
+      <svg
+        aria-hidden="true"
+        xmlns="http://www.w3.org/2000/svg"
+        width="24"
+        height="24"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        class="lucide lucide-info-icon lucide-info">
+        <circle cx="12" cy="12" r="10"></circle>
+        <path d="M12 16v-4"></path>
+        <path d="M12 8h.01"></path>
+      </svg>
+    </a>
+  </div>
+  <div class="flex justify-center items-center h-[50px] w-[140px] text-black">
+    <div class="A score-box">A</div>
+    <div class="B score-box">B</div>
+    <div class="C score-box">C</div>
+    <div class="D score-box">D</div>
+    <div class="E score-box">E</div>
+  </div>
+  <div id="swagscore-message" class="mt-1 label-xs"></div>
+  <div class="mt-1 flex gap-1">
+    <div class="flex flex-col gap-0.5 justify-center items-center">
+      <div
+        id="swagscore-perf"
+        class="radial-progress label-xs"
+        style="--value:100; --size:2rem; --thickness:0.2rem;"
+        aria-valuenow="0"
+        role="progressbar"
+        aria-label="Score de performance">
+        -
+      </div>
+      <p class="label-xs">perf</p>
+    </div>
+    <div class="flex flex-col gap-0.5 justify-center items-center">
+      <div
+        id="swagscore-seo"
+        class="radial-progress label-xs"
+        style="--value:100; --size:2rem; --thickness:0.2rem;"
+        aria-valuenow="0"
+        role="progressbar"
+        aria-label="Score SEO">
+        -
+      </div>
+      <p class="label-xs">seo</p>
+    </div>
+    <div class="flex flex-col gap-0.5 justify-center items-center">
+      <div
+        id="swagscore-a11y"
+        class="radial-progress label-xs"
+        style="--value:100; --size:2rem; --thickness:0.2rem;"
+        aria-valuenow="0"
+        role="progressbar"
+        aria-label="Score d'accessibilité">
+        -
+      </div>
+      <p class="label-xs">a11y</p>
+    </div>
+    <div class="flex flex-col gap-0.5 justify-center items-center">
+      <div
+        id="swagscore-code"
+        class="radial-progress label-xs"
+        style="--value:100; --size:2rem; --thickness:0.2rem;"
+        aria-valuenow="0"
+        role="progressbar"
+        aria-label="Score de qualité du code">
+        -
+      </div>
+      <p class="label-xs">code</p>
+    </div>
+  </div>
+</div>
+
+<script>
+  const swagscore = document.getElementById('swagscore')?.dataset.size
+  const perfData = document.getElementById('swagscore')?.dataset.perf
+  const seoData = document.getElementById('swagscore')?.dataset.seo
+  const a11yData = document.getElementById('swagscore')?.dataset.a11y
+  const codeData = document.getElementById('swagscore')?.dataset.code
+
+  if (swagscore) {
+    let url = '/.netlify/functions/sizeInfo'
+    let options = {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Access-Control-Allow-Origin': '*'
+      },
+      body: JSON.stringify(swagscore)
+    }
+    const sizeInfo = await fetch(url, options).then((res) => res.json())
+
+    document.getElementById('swagscore-message').innerHTML = sizeInfo.message
+    const activeScoreBox = document.querySelector(`.score-box.${sizeInfo.index}`)
+    activeScoreBox.classList.add('active')
+    const perf = document.getElementById('swagscore-perf')
+    perf.style.setProperty('--value', perfData)
+    perf.setAttribute('aria-valuenow', perfData)
+    perf.innerHTML = perfData
+    if (perfData > 90) {
+      perf.classList.add('text-success')
+    } else if (perfData > 50) {
+      perf.classList.add('text-warning')
+    } else {
+      perf.classList.add('text-error')
+    }
+    const seo = document.getElementById('swagscore-seo')
+    seo.style.setProperty('--value', seoData)
+    seo.setAttribute('aria-valuenow', seoData)
+    seo.innerHTML = seoData
+    if (seoData > 90) {
+      seo.classList.add('text-success')
+    } else if (seoData > 50) {
+      seo.classList.add('text-warning')
+    } else {
+      seo.classList.add('text-error')
+    }
+    const a11y = document.getElementById('swagscore-a11y')
+    a11y.style.setProperty('--value', a11yData)
+    a11y.setAttribute('aria-valuenow', a11yData)
+    a11y.innerHTML = a11yData
+    if (a11yData > 90) {
+      a11y.classList.add('text-success')
+    } else if (a11yData > 50) {
+      a11y.classList.add('text-warning')
+    } else {
+      a11y.classList.add('text-error')
+    }
+    const code = document.getElementById('swagscore-code')
+    code.style.setProperty('--value', codeData)
+    code.setAttribute('aria-valuenow', codeData)
+    code.innerHTML = codeData
+    if (codeData > 90) {
+      code.classList.add('text-success')
+    } else if (codeData > 50) {
+      code.classList.add('text-warning')
+    } else {
+      code.classList.add('text-error')
+    }
+  }
+</script>
+
+<style>
+  @reference '../../styles/tailwind.css';
+
+  .score-box {
+    @apply p-1.5;
+    transition: all 0.2s;
+  }
+  .score-box.active {
+    font-weight: bold;
+    transform: scale(1.2);
+    border: 4px solid #fff;
+    border-radius: 20px;
+    z-index: 10;
+  }
+  .score-box:not(.active) {
+    transform: scale(1);
+    border: 0px solid #fff;
+  }
+  .score-box:first-of-type:not(.active) {
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
+  }
+  .score-box:last-of-type:not(.active) {
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
+  }
+  .A {
+    background-color: #48d18d;
+  }
+  .B {
+    background-color: #95ca40;
+  }
+  .C {
+    background-color: #fdde0e;
+  }
+  .D {
+    background-color: #faa33b;
+  }
+  .E {
+    background-color: #ff524a;
+  }
+</style>

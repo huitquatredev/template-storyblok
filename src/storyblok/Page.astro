@@ -1,0 +1,27 @@
+---
+import { storyblokEditable } from '@storyblok/astro'
+import StoryblokComponent from '@storyblok/astro/StoryblokComponent.astro'
+
+const { blok } = Astro.props
+let first = true
+blok.body.map((item) => {
+  Object.keys(item).forEach((key) => {
+    if (key == 'img') {
+      if (first) {
+        item[key].lazy = false
+        first = false
+      } else {
+        item[key].lazy = true
+      }
+    }
+  })
+})
+---
+
+<div {...storyblokEditable(blok)}>
+  {
+    blok.body?.map((blok) => {
+      return <StoryblokComponent blok={blok} />
+    })
+  }
+</div>

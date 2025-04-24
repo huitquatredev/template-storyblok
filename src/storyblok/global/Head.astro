@@ -1,0 +1,66 @@
+---
+// https://htmlhead.dev
+// FUTUR : manage other og:type (article, product, profile, website)
+// TODO : change ICBM Geo localisation
+
+import '../../styles/tailwind.css'
+import '../../styles/richtext.css'
+import '../../styles/aos.css'
+
+const {
+  title,
+  description,
+  canonical,
+  themeColor,
+  themeDarkColor,
+  themeLightColor,
+  robots,
+  ogImage,
+  ogImageAlt,
+  schema
+} = Astro.props
+---
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+
+  <title>{title}</title>
+
+  {themeColor && <meta name="theme-color" content={themeColor} />}
+  {themeDarkColor && <meta name="theme-color" media="(prefers-color-scheme: dark)" content={themeDarkColor} />}
+  {themeLightColor && <meta name="theme-color" media="(prefers-color-scheme: light)" content={themeLightColor} />}
+
+  <meta name="generator" content={Astro.generator} />
+
+  {canonical && <link rel="canonical" href={canonical} />}
+  {!canonical && <link rel="canonical" href={Astro.url.href} />}
+
+  <meta name="description" content={description} />
+
+  {robots && <meta name="robots" content={robots} />}
+  {!robots && <meta name="robots" content="all" />}
+
+  <link rel="icon" href="/favicon.svg" />
+
+  <meta property="og:title" content={title} />
+  <meta property="og:type" content="website" />
+  {ogImage && <meta property="og:image" content={ogImage} />}
+  <meta property="og:url" content={Astro.url.href} />
+
+  <meta property="og:description" content={description} />
+  <meta property="og:locale" content="fr_FR" />
+  <meta property="og:site_name" content="huitquatre" />
+  {ogImageAlt && <meta property="og:image:alt" content={ogImageAlt} />}
+
+  <meta name="twitter:dnt" content="on" />
+
+  <meta name="ICBM" content="44.1913531618265, 4.777555750329484" />
+  <meta name="geo.position" content="44.1913531618265; 4.777555750329484" />
+  <meta name="geo.region" content="FR" />
+  <meta name="geo.placename" content="Piolenc" />
+
+  {schema && <script type="application/ld+json" set:html={schema} />}
+
+  <slot />
+</head>

@@ -1,0 +1,92 @@
+---
+import Head from '../storyblok/global/Head.astro'
+import Footer from '../storyblok/global/Footer.astro'
+import NavBar from '../storyblok/global/NavBar.astro'
+
+const { title, description, canonical, robots, ogImage, ogImageAlt, schema } = Astro.props
+
+let menu = [
+  {
+    name: 'item1',
+    href: '/item-1'
+  },
+  {
+    name: 'item2',
+    href: '/item-2'
+  },
+  {
+    name: 'item3',
+    href: '/item-3'
+  }
+]
+
+let logo = {
+  src: 'https://picsum.photos/400/200',
+  alt: 'logo'
+}
+---
+
+<html lang="fr">
+  <Head
+    title={title}
+    description={description}
+    canonical={canonical}
+    robots={robots}
+    ogImage={ogImage}
+    ogImageAlt={ogImageAlt}
+    schema={schema}
+  />
+  <body class="is-loading">
+    <NavBar logo={logo} name="myCompany" menu={menu} breakpoint="sm" />
+    <main>
+      <slot />
+    </main>
+    <Footer />
+
+    <script>
+      import Lenis from 'lenis'
+      import AOS from 'aos'
+
+      AOS.init({
+        offset: 200,
+        duration: 600,
+        easing: 'ease-in-sine',
+        delay: 100
+      })
+
+      const scrollwrapper = document.querySelector('html')
+
+      const lenis = new Lenis({
+        lerp: 0.05,
+        wheelMultiplier: 0.8,
+        wrapper: scrollwrapper,
+        prevent: (node) => node.classList.contains('modal')
+      })
+
+      function raf(time) {
+        lenis.raf(time)
+        requestAnimationFrame(raf)
+      }
+
+      requestAnimationFrame(raf)
+
+      const mediaQueryList = window.matchMedia('(min-width: 1024px)')
+      if (mediaQueryList.matches) {
+        document.body.classList.add('is-large')
+        document.body.classList.remove('is-narrow')
+      } else {
+        document.body.classList.add('is-narrow')
+        document.body.classList.remove('is-large')
+      }
+      mediaQueryList.addEventListener('change', (e) => {
+        if (e.matches) {
+          document.body.classList.add('is-large')
+          document.body.classList.remove('is-narrow')
+        } else {
+          document.body.classList.add('is-narrow')
+          document.body.classList.remove('is-large')
+        }
+      })
+    </script>
+  </body>
+</html>

@@ -1,0 +1,76 @@
+---
+import NetlifyImage from '../utils/NetlifyImage.astro'
+const { logo, name, menu, breakpoint } = Astro.props
+const currentPath = Astro.url.pathname
+---
+
+<header class="navbar bg-base-100 shadow-sm max-w-3xl mx-auto">
+  <nav class="navbar-start flex justify-between w-full">
+    <a href="/" class="flex gap-2 justify-center items-center">
+      <!-- <NetlifyImage src={logo.src} alt={logo.alt} class="max-h-20 w-auto" noremote="true" /> -->
+      <svg width="36" height="40" viewBox="0 0 36 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path
+          fill-rule="evenodd"
+          clip-rule="evenodd"
+          d="M0 15V31H5C5.52527 31 6.04541 31.1035 6.53076 31.3045C7.01599 31.5055 7.45703 31.8001 7.82837 32.1716C8.19983 32.543 8.49451 32.984 8.69556 33.4693C8.89648 33.9546 9 34.4747 9 35V40H21L36 25V9H31C30.4747 9 29.9546 8.89655 29.4692 8.69553C28.984 8.49451 28.543 8.19986 28.1716 7.82843C27.8002 7.457 27.5055 7.01602 27.3044 6.53073C27.1035 6.04544 27 5.5253 27 5V0H15L0 15ZM17 30H10V19L19 10H26V21L17 30Z"
+          fill="white">
+        </path>
+      </svg>
+      <span>{name}</span>
+    </a>
+    <div class="dropdown dropdown-end">
+      <div
+        tabindex="0"
+        role="button"
+        class=`btn btn-ghost ${breakpoint === "lg" ? "lg:hidden" : breakpoint === "md" ? "md:hidden" : "sm:hidden"}`>
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h8m-8 6h16"></path>
+        </svg>
+      </div>
+      <ul tabindex="0" class="menu dropdown-content bg-base-100 rounded-box w-max z-1 mt-3 p-2 shadow">
+        {
+          menu.map((item) => {
+            if (item.href === currentPath) {
+              return (
+                <li>
+                  <a href={item.href} aria-current="page">
+                    {item.name}
+                  </a>
+                </li>
+              )
+            } else {
+              return (
+                <li>
+                  <a href={item.href}>{item.name}</a>
+                </li>
+              )
+            }
+          })
+        }
+      </ul>
+    </div>
+  </nav>
+  <nav class=`navbar-center hidden ${breakpoint === "lg" ? "lg:flex" : breakpoint === "md" ? "md:flex" : "sm:flex"}`>
+    <ul class="menu menu-horizontal px-1">
+      {
+        menu.map((item) => {
+          if (item.href === currentPath) {
+            return (
+              <li>
+                <a href={item.href} aria-current="page">
+                  {item.name}
+                </a>
+              </li>
+            )
+          } else {
+            return (
+              <li>
+                <a href={item.href}>{item.name}</a>
+              </li>
+            )
+          }
+        })
+      }
+    </ul>
+  </nav>
+</header>
