@@ -34,7 +34,7 @@ bgImgUrl.searchParams.set('url', blok?.image.filename)
 {
   blok.layout === 'inline' && (
     <div class="hero bg-base-200 min-h-screen">
-      <div class="hero-content flex-col lg:flex-row justify-center items-center">
+      <div class={`"hero-content flex-col lg:flex-row${blok.reversed ? '-reverse' : ''} justify-center items-center`}>
         {blok.image && (
           <NetlifyImage
             src={blok.image.filename}
