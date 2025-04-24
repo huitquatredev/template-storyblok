@@ -1,10 +1,10 @@
-# TODO : add remote_images address for Netlify Images (i.e. https://a.storyblok.com/f/331539/.*)
+# TODO : add remote_images address for Netlify Images (i.e. "https://a.storyblok.com/f/331539/.*")
 
 [build]
   command = "npm run build"
   functions = "netlify/functions"
 [images]
-  remote_images = [https://a.storyblok.com/f/335088/.*]
+  remote_images = ["https://a.storyblok.com/f/335088/.*"]
 [dev]
   targetPort = 4321
   
