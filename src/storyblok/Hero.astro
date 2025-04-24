@@ -1,5 +1,6 @@
 ---
 import { storyblokEditable } from '@storyblok/astro'
+import NetlifyImage from './utils/NetlifyImage.astro'
 import RichText from './utils/RichText.astro'
 const { blok } = Astro.props
 
@@ -23,6 +24,24 @@ bgImgUrl.searchParams.set('url', blok?.image.filename)
     <div class="hero min-h-screen" style={`background-image: url(${bgImgUrl});`} {...storyblokEditable(blok)}>
       <div class="hero-overlay" />
       <div class="hero-content text-neutral-content text-center">
+        <div class="max-w-md">
+          <RichText content={blok.content} />
+        </div>
+      </div>
+    </div>
+  )
+}
+{
+  blok.layout === 'inline' && (
+    <div class="hero bg-base-200 min-h-screen">
+      <div class="hero-content flex-col lg:flex-row justify-center items-center">
+        {blok.image && (
+          <NetlifyImage
+            src={blok.image.filename}
+            alt={blok.image.alt}
+            class="max-w-full sm:max-w-sm lg:max-w-md rounded-lg shadow-2xl"
+          />
+        )}
         <div class="max-w-md">
           <RichText content={blok.content} />
         </div>
