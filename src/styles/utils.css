@@ -1,0 +1,13 @@
+@reference "./tailwind.css";
+
+.container {
+  @apply w-[calc(100%_-_2.5rem)] lg:w-[calc(100%_-_4rem)] mx-auto max-w-lg md:max-w-3xl lg:max-w-5xl xl:max-w-7xl;
+}
+
+.container-sm {
+  @apply w-[calc(100%_-_2.5rem)] lg:w-[calc(100%_-_4rem)] mx-auto max-w-lg md:max-w-3xl;
+}
+
+section {
+  @apply my-16;
+}

@@ -8,45 +8,47 @@ let bgImgUrl = new URL('.netlify/images', Astro.site)
 bgImgUrl.searchParams.set('url', blok?.image.filename)
 ---
 
-{
-  blok.layout === 'center' && !blok.image && (
-    <div class="hero bg-base-200 min-h-screen" {...storyblokEditable(blok)}>
-      <div class="hero-content text-center">
-        <div class="max-w-md">
-          <RichText content={blok.content} />
+<section {...storyblokEditable(blok)}>
+  {
+    blok.layout === 'center' && !blok.image && (
+      <div class="hero min-h-screen">
+        <div class="hero-content container text-center">
+          <div class="rich-text">
+            <RichText content={blok.content} />
+          </div>
         </div>
       </div>
-    </div>
-  )
-}
-{
-  blok.layout === 'center' && blok.image && (
-    <div class="hero min-h-screen" style={`background-image: url(${bgImgUrl});`} {...storyblokEditable(blok)}>
-      <div class="hero-overlay" />
-      <div class="hero-content text-neutral-content text-center">
-        <div class="max-w-md">
-          <RichText content={blok.content} />
+    )
+  }
+  {
+    blok.layout === 'center' && blok.image && (
+      <div class="hero min-h-screen" style={`background-image: url(${bgImgUrl});`}>
+        <div class="hero-overlay" />
+        <div class="hero-content container text-neutral-content text-center">
+          <div class="rich-text">
+            <RichText content={blok.content} />
+          </div>
         </div>
       </div>
-    </div>
-  )
-}
-{
-  blok.layout === 'inline' && (
-    <div class="hero bg-base-200 min-h-screen">
-      <div
-        class={`hero-content flex-col ${blok.reversed ? 'lg:flex-row-reverse' : 'lg:flex-row'} justify-center items-center`}>
-        {blok.image && (
-          <NetlifyImage
-            src={blok.image.filename}
-            alt={blok.image.alt}
-            class="max-w-full sm:max-w-sm lg:max-w-md rounded-lg shadow-2xl"
-          />
-        )}
-        <div class="max-w-md">
-          <RichText content={blok.content} />
+    )
+  }
+  {
+    blok.layout === 'inline' && (
+      <div class="hero min-h-screen">
+        <div
+          class={`hero-content container flex-col ${blok.reversed ? 'lg:flex-row-reverse' : 'lg:flex-row'} justify-center items-center`}>
+          {blok.image && (
+            <NetlifyImage
+              src={blok.image.filename}
+              alt={blok.image.alt}
+              class="max-w-full sm:max-w-sm md:max-w-md rounded-lg shadow-2xl"
+            />
+          )}
+          <div class="rich-text">
+            <RichText content={blok.content} />
+          </div>
         </div>
       </div>
-    </div>
-  )
-}
+    )
+  }
+</section>

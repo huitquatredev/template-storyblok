@@ -42,6 +42,7 @@ export default defineConfig({
       components: {
         page: "storyblok/Page",
         hero: "storyblok/Hero",
+        feature: "storyblok/Feature",
       },
     }),
     sitemap({

@@ -5,7 +5,10 @@
     light --default,
     dark --prefersdark;
 }
-
 @utility btn {
   @apply mx-1;
+}
+
+@utility hero-content {
+  @apply px-0 gap-[calc(0.25rem*8)];
 }
