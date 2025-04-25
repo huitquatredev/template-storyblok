@@ -5,7 +5,6 @@ import BaseLayout from '../layout/BaseLayout.astro'
 import parseUrl from '../utils/parseUrl'
 import isPreview from '../utils/isPreview'
 import generateStaticPaths from '../utils/generateStaticPaths'
-import Faq from '../storyblok/Faq.astro'
 
 export async function getStaticPaths() {
   //We have moved all the code to a generateStaticPaths() function.
@@ -37,5 +36,4 @@ const story = data.story
   ogImageAlt={story.content.ogImageAlt}
   schema={story.content.schema}>
   <StoryblokComponent language={language} blok={story.content} />
-  <Faq />
 </BaseLayout>

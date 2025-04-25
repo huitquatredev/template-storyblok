@@ -4,19 +4,31 @@ import NetlifyImage from './utils/NetlifyImage.astro'
 import InlineSvg from './utils/InlineSvg.astro'
 import Heading from './utils/Heading.astro'
 import RichText from './utils/RichText.astro'
-const { blok } = Astro.props
+let { blok } = Astro.props
+
+blok.icons?.map((icon) => {
+  icon.image.isSvg = false
+  if (icon.image.filename.endsWith('.svg')) {
+    icon.image.isSvg = true
+  }
+})
 ---
 
 <section class="container" {...storyblokEditable(blok)}>
-  <div class="mx-auto max-w-2xl mb-8 lg:mb-14 text-center">
-    <RichText content={blok.content} />
-  </div>
+  {
+    blok.content && (
+      <div class="mx-auto max-w-2xl mb-8 lg:mb-14 text-center">
+        <RichText content={blok.content} />
+      </div>
+    )
+  }
   <div
     class={`mx-auto max-w-3xl grid ${blok.icons?.length === 3 ? 'grid-cols-3' : blok.icons?.length === 4 ? 'grid-cols-2 md:grid-cols-4' : blok.icons?.length === 5 ? 'grid-cols-2 sm:grid-cols-3 md:grid-cols-5' : 'grid-cols-2 sm:grid-cols-3 lg:grid-cols-6'} gap-6 lg:gap-8`}>
     {
       blok.icons?.map((icon) => (
         <div class="text-center flex flex-col justify-center items-center">
-          <InlineSvg src={icon.image.filename} />
+          {icon.image.isSvg && <InlineSvg src={icon.image.filename} />}
+          {!icon.image.isSvg && <NetlifyImage src={icon.image.filename} alt={icon.image.alt} class="w-12 rounded-lg" />}
           <div class="mt-2 sm:mt-6">
             <Heading classlist="sm:text-lg font-semibold" tag={icon.tag} content={icon.title} />
           </div>
