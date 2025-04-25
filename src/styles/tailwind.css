@@ -1,10 +1,10 @@
 @import "tailwindcss";
 @plugin "@tailwindcss/typography";
 @plugin "daisyui" {
-  themes:
-    light --default,
-    dark --prefersdark;
+  themes: light --default;
+  /* dark --prefersdark; */
 }
+
 @utility btn {
   @apply mx-1 leading-none;
 }

@@ -2,7 +2,12 @@
 import { storyblokEditable } from '@storyblok/astro'
 import NetlifyImage from './utils/NetlifyImage.astro'
 import RichText from './utils/RichText.astro'
+
 const { blok } = Astro.props
+
+let foregroundColor = blok.foregroundColorInvert ? 'text-base-100' : 'text-base-content'
+
+console.log(foregroundColor)
 
 let bgImgUrl = new URL('.netlify/images', Astro.site)
 bgImgUrl.searchParams.set('url', blok?.image.filename)
@@ -13,7 +18,7 @@ bgImgUrl.searchParams.set('url', blok?.image.filename)
     blok.layout === 'center' && !blok.image && (
       <div class="hero min-h-screen">
         <div class="hero-content container text-center">
-          <div class="rich-text">
+          <div class={'rich-text ' + foregroundColor}>
             <RichText content={blok.content} />
           </div>
         </div>
@@ -22,10 +27,10 @@ bgImgUrl.searchParams.set('url', blok?.image.filename)
   }
   {
     blok.layout === 'center' && blok.image && (
-      <div class="hero min-h-screen" style={`background-image: url(${bgImgUrl});`}>
+      <div id="hero-bg" class="hero min-h-screen" style={`background-image: url(${bgImgUrl});`}>
         <div class="hero-overlay" />
-        <div class="hero-content container text-neutral-content text-center">
-          <div class="rich-text">
+        <div class="hero-content container text-center">
+          <div class={'rich-text ' + foregroundColor}>
             <RichText content={blok.content} />
           </div>
         </div>
@@ -44,7 +49,7 @@ bgImgUrl.searchParams.set('url', blok?.image.filename)
               class="max-w-full sm:max-w-sm md:max-w-md rounded-lg shadow-2xl"
             />
           )}
-          <div class="rich-text">
+          <div class={'rich-text ' + foregroundColor}>
             <RichText content={blok.content} />
           </div>
         </div>
