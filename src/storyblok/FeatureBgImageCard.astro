@@ -1,0 +1,19 @@
+---
+import { storyblokEditable } from '@storyblok/astro'
+import RichText from './utils/RichText.astro'
+const { blok } = Astro.props
+
+let bgImgUrl = new URL('.netlify/images', Astro.site)
+bgImgUrl.searchParams.set('url', blok?.image.filename)
+---
+
+<section class="container" {...storyblokEditable(blok)}>
+  <div
+    class={`min-h-[35vh] md:min-h-[75vh] bg-[url('${bgImgUrl}')] bg-center bg-cover bg-no-repeat relative rounded-xl`}>
+    <div class="absolute bottom-0 start-0 end-0 max-w-xs text-center mx-auto p-6 md:start-auto md:text-start md:mx-0">
+      <div class="px-5 py-4 inline-block bg-primary rounded-lg md:p-7">
+        <RichText content={blok.content} />
+      </div>
+    </div>
+  </div>
+</section>
