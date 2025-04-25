@@ -8,7 +8,7 @@ let bgImgUrl = new URL('.netlify/images', Astro.site)
 bgImgUrl.searchParams.set('url', blok?.image.filename)
 ---
 
-<section {...storyblokEditable(blok)}>
+<section {...storyblokEditable(blok)} class="my-0">
   {
     blok.layout === 'center' && !blok.image && (
       <div class="hero min-h-screen">
