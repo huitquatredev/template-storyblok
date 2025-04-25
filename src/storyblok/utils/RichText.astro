@@ -6,7 +6,7 @@ import toUrl from '../../utils/toUrl'
 const { content } = Astro.props
 
 const mySchema = cloneDeep(RichTextSchema)
-const renderedRichText = renderRichText(content, {
+let renderedRichText = renderRichText(content, {
   schema: mySchema,
   resolver: (component, blok) => {
     // console.log(blok)
@@ -18,8 +18,23 @@ const renderedRichText = renderRichText(content, {
     }
   }
 })
+
+renderedRichText = renderedRichText?.replaceAll(
+  '<li>',
+  `<li><svg class="inline mr-4 size-3.5" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>`
+)
 ---
 
-<div class="prose-sm md:prose-base lg:prose-lg xl:prose-xl">
+<div class="prose-sm md:prose-base lg:prose-lg xl:prose-xl rich-text">
   <Fragment set:html={renderedRichText} />
 </div>
+
+<style>
+  .rich-text :global(ul) {
+    list-style: none;
+  }
+  .rich-text :global(ul li p) {
+    display: inline;
+    margin-block: 0.25rem;
+  }
+</style>

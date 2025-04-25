@@ -1,0 +1,6 @@
+---
+const { src } = Astro.props
+const innerHTML = fetch(src).then((res) => res.text())
+---
+
+<Fragment set:html={innerHTML} />
