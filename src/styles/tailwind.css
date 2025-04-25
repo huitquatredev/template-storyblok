@@ -6,7 +6,7 @@
     dark --prefersdark;
 }
 @utility btn {
-  @apply mx-1;
+  @apply mx-1 leading-none;
 }
 
 @utility hero-content {

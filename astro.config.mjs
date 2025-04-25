@@ -44,6 +44,7 @@ export default defineConfig({
         hero: "storyblok/Hero",
         featureSimple: "storyblok/FeatureSimple",
         featureGalleryIcons: "storyblok/FeatureGalleryIcons",
+        featureBgImageCard: "storyblok/FeatureBgImageCard",
       },
     }),
     sitemap({
