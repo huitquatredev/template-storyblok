@@ -48,6 +48,7 @@ export default defineConfig({
         faq: "storyblok/Faq",
         timeline: "storyblok/Timeline",
         testimonialStats: "storyblok/TestimonialStats",
+        logoGallery: "storyblok/LogoGallery",
       },
     }),
     sitemap({
