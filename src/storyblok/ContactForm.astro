@@ -1,12 +1,10 @@
 ---
 import { storyblokEditable } from '@storyblok/astro'
 import RichText from './utils/RichText.astro'
-import InlineSvg from './utils/InlineSvg.astro'
 import Heading from './utils/Heading.astro'
 const { blok } = Astro.props
 ---
 
-<!-- Contact Us -->
 <section class="container" {...storyblokEditable(blok)}>
   <div class="max-w-xl mx-auto">
     {

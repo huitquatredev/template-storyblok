@@ -50,6 +50,7 @@ export default defineConfig({
         testimonialStats: "storyblok/TestimonialStats",
         logoGallery: "storyblok/LogoGallery",
         contactForm: "storyblok/ContactForm",
+        contactInfo: "storyblok/ContactInfo",
       },
     }),
     sitemap({

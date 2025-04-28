@@ -1,0 +1,56 @@
+---
+import { storyblokEditable } from '@storyblok/astro'
+import RichText from './utils/RichText.astro'
+import Heading from './utils/Heading.astro'
+import NetlifyImage from './utils/NetlifyImage.astro'
+import InlineSvg from './utils/InlineSvg.astro'
+const { blok } = Astro.props
+---
+
+<section class="container" {...storyblokEditable(blok)}>
+  <div class="max-w-xl mx-auto">
+    {
+      blok.title && (
+        <div class="text-center">
+          <RichText content={blok.title} />
+        </div>
+      )
+    }
+  </div>
+
+  <div class="grid grid-cols-1 lg:grid-cols-2 lg:items-center gap-6 md:gap-8 lg:gap-12">
+    <div class="aspect-w-16 aspect-h-6 lg:aspect-h-14 overflow-hidden rounded-2xl">
+      <NetlifyImage
+        class="group-hover:scale-105 group-focus:scale-105 transition-transform duration-500 ease-in-out object-cover rounded-2xl"
+        src={blok.image.filename}
+        alt={blok.image.alt}
+      />
+    </div>
+
+    <div class="space-y-8 lg:space-y-16">
+      {
+        blok.infos &&
+          blok.infos.map((info) => (
+            <div>
+              <Heading tag={info.tag} classlist="mb-5 font-semibold" content={info.title} />
+              <div class="grid sm:grid-cols-2 gap-4 sm:gap-6 md:gap-8 lg:gap-12">
+                {info.items.map((item) => (
+                  <div class="flex gap-4">
+                    <div class="shrink-0 size-5">
+                      {item.image.filename.endsWith('.svg') && <InlineSvg src={item.image.filename} />}
+                      {!item.image.filename.endsWith('.svg') && (
+                        <NetlifyImage src={item.image.filename} alt={item.image.alt} />
+                      )}
+                    </div>
+                    <div class="grow">
+                      <RichText content={item.content} />
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          ))
+      }
+    </div>
+  </div>
+</section>
