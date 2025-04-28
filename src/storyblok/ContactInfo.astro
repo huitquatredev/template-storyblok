@@ -8,7 +8,7 @@ const { blok } = Astro.props
 ---
 
 <section class="container" {...storyblokEditable(blok)}>
-  <div class="max-w-xl mx-auto">
+  <div class="max-w-xl mx-auto mb-8">
     {
       blok.title && (
         <div class="text-center">
@@ -19,12 +19,8 @@ const { blok } = Astro.props
   </div>
 
   <div class="grid grid-cols-1 lg:grid-cols-2 lg:items-center gap-6 md:gap-8 lg:gap-12">
-    <div class="aspect-w-16 aspect-h-6 lg:aspect-h-14 overflow-hidden rounded-2xl">
-      <NetlifyImage
-        class="group-hover:scale-105 group-focus:scale-105 transition-transform duration-500 ease-in-out object-cover rounded-2xl"
-        src={blok.image.filename}
-        alt={blok.image.alt}
-      />
+    <div class="overflow-hidden rounded-2xl">
+      <NetlifyImage class="object-cover max-h-80 rounded-2xl" src={blok.image.filename} alt={blok.image.alt} />
     </div>
 
     <div class="space-y-8 lg:space-y-16">

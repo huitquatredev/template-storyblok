@@ -51,6 +51,7 @@ export default defineConfig({
         logoGallery: "storyblok/LogoGallery",
         contactForm: "storyblok/ContactForm",
         contactInfo: "storyblok/ContactInfo",
+        blocText: "storyblok/BlocText",
       },
     }),
     sitemap({

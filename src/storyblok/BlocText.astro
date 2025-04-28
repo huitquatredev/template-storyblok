@@ -1,0 +1,25 @@
+---
+import { storyblokEditable } from '@storyblok/astro'
+import RichText from './utils/RichText.astro'
+import Heading from './utils/Heading.astro'
+const { blok } = Astro.props
+---
+
+<section class="relative z-[1] container" {...storyblokEditable(blok)}>
+  <p
+    class="text-sm text-base-300 capitalize mb-6 lg:mb-8 flex gap-4 items-center after:content-[''] after:h-px after:grow after:bg-base-300">
+    {blok.tagline}
+  </p>
+
+  <div class="grid grid-cols-12 gap-y-6 lg:gap-0">
+    <div class="col-span-12 lg:col-span-4">
+      <Heading tag={blok.tag} classlist="font-bold text-4xl leading-tight" content={blok.title} />
+    </div>
+
+    <div class="col-span-12 lg:col-span-7 lg:col-start-6">
+      <div class="leading-relaxed">
+        <RichText content={blok.content} />
+      </div>
+    </div>
+  </div>
+</section>
