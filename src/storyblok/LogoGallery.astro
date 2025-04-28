@@ -5,7 +5,7 @@ import InlineSvg from './utils/InlineSvg.astro'
 import NetlifyImage from './utils/NetlifyImage.astro'
 const { blok } = Astro.props
 
-blok.logos?.map((item) => (item.isSvg = item.image.filename.endsWith('.svg')))
+blok.logos?.map((item) => (item.isSvg = item.filename.endsWith('.svg')))
 ---
 
 <section class="container" {...storyblokEditable(blok)}>
@@ -13,12 +13,12 @@ blok.logos?.map((item) => (item.isSvg = item.image.filename.endsWith('.svg')))
     <RichText content={blok.title} />
   </div>
 
-  <ul class="flex justify-center gap-x-6 sm:gap-x-12 lg:gap-x-24">
+  <ul class="flex justify-center items-center gap-x-6 sm:gap-x-12 lg:gap-x-24">
     {
       blok.logos?.map((logo) => (
-        <li class="py-3 lg:py-5 w-16 h-auto md:w-20 lg:w-24 mx-auto sm:mx-0 text-base-content/50">
-          {logo.isSvg && <InlineSvg src={logo.image.filename} />}
-          {!logo.isSvg && <NetlifyImage src={logo.image.filename} alt={logo.image.alt} />}
+        <li class="py-3 lg:py-5 w-16 h-auto md:w-20 lg:w-24 mx-auto sm:mx-0 text-base-content/50 flex justify-center">
+          {logo.isSvg && <InlineSvg src={logo.filename} />}
+          {!logo.isSvg && <NetlifyImage src={logo.filename} alt={logo.alt} />}
         </li>
       ))
     }
