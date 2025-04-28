@@ -52,7 +52,8 @@ export default defineConfig({
         contactForm: "storyblok/ContactForm",
         contactInfo: "storyblok/ContactInfo",
         blocText: "storyblok/BlocText",
-        stepsSimple: "storyblok/StepsSimple",
+        stepsRows: "storyblok/StepsRows",
+        stepsCols: "storyblok/StepsCols",
       },
     }),
     sitemap({
