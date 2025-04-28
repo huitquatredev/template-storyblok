@@ -47,6 +47,7 @@ export default defineConfig({
         featureBgImageCard: "storyblok/FeatureBgImageCard",
         faq: "storyblok/Faq",
         timeline: "storyblok/Timeline",
+        testimonialStats: "storyblok/TestimonialStats",
       },
     }),
     sitemap({

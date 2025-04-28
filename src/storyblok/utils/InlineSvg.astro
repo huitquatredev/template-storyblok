@@ -3,4 +3,4 @@ const { src } = Astro.props
 const innerHTML = fetch(src).then((res) => res.text())
 ---
 
-<Fragment set:html={innerHTML} />
+<span class="fill-current stroke-current"><Fragment set:html={innerHTML} /></span>

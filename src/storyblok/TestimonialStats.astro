@@ -1,18 +1,21 @@
 ---
 import { storyblokEditable } from '@storyblok/astro'
 import RichText from './utils/RichText.astro'
+import InlineSvg from './utils/InlineSvg.astro'
 const { blok } = Astro.props
+
+console.log(blok)
 ---
 
 <section class="container" {...storyblokEditable(blok)}>
   <div class="lg:grid lg:grid-cols-12 lg:gap-16 lg:items-center lg:justify-between">
     <div class="lg:col-span-5 lg:col-start-1">
       <div class="mb-8">
-        <RichText content={blok.title} />
+        <div class="my-4"><RichText content={blok.title} /></div>
 
-        <blockquote class="relative">
+        <blockquote class="relative mt-8">
           <svg
-            class="absolute top-0 start-0 transform -translate-x-6 -translate-y-8 size-16 text-base-100"
+            class="absolute top-0 start-0 transform -translate-x-6 -translate-y-8 size-16 text-base-content/15"
             width="16"
             height="16"
             viewBox="0 0 16 16"
@@ -33,68 +36,38 @@ const { blok } = Astro.props
             <div class="flex items-center gap-x-4">
               <div class="grow">
                 <div class="font-semibold">{blok.author}</div>
-                <div class="text-xs text-base-300">{blok.fonction}</div>
+                <div class="text-xs text-base-content/95">{blok.fonction}</div>
               </div>
             </div>
           </footer>
         </blockquote>
       </div>
+    </div>
 
-      <div class="mt-10 lg:mt-0 lg:col-span-6 lg:col-end-13">
-        <div class="space-y-6 sm:space-y-8">
-          <!-- List -->
-          <ul class="grid grid-cols-2 divide-y-2 divide-x-2 divide-base-200 overflow-hidden">
-            <li class="flex flex-col -m-0.5 p-4 sm:p-8">
-              <div class="flex items-end gap-x-2 text-3xl sm:text-5xl font-bold text-gray-800 mb-2">45k+</div>
-              <p class="text-sm sm:text-base text-gray-600">users - from new startups to public companies</p>
-            </li>
-
-            <li class="flex flex-col -m-0.5 p-4 sm:p-8">
-              <div class="flex items-end gap-x-2 text-3xl sm:text-5xl font-bold text-gray-800 mb-2">
-                <svg
-                  class="shrink-0 size-5 text-blue-600"
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="24"
-                  height="24"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  stroke-width="2"
-                  stroke-linecap="round"
-                  stroke-linejoin="round">
-                  <path d="m5 12 7-7 7 7"></path><path d="M12 19V5"></path>
-                </svg>
-                23%
-              </div>
-              <p class="text-sm sm:text-base text-gray-600">increase in traffic on webpages with Looms</p>
-            </li>
-
-            <li class="flex flex-col -m-0.5 p-4 sm:p-8">
-              <div class="flex items-end gap-x-2 text-3xl sm:text-5xl font-bold text-gray-800 mb-2">
-                <svg
-                  class="shrink-0 size-5 text-blue-600"
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="24"
-                  height="24"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  stroke-width="2"
-                  stroke-linecap="round"
-                  stroke-linejoin="round">
-                  <path d="m5 12 7-7 7 7"></path><path d="M12 19V5"></path>
-                </svg>
-                9.3%
-              </div>
-              <p class="text-sm sm:text-base text-gray-600">boost in reply rates across sales outreach</p>
-            </li>
-
-            <li class="flex flex-col -m-0.5 p-4 sm:p-8">
-              <div class="flex items-end gap-x-2 text-3xl sm:text-5xl font-bold text-gray-800 mb-2">2x</div>
-              <p class="text-sm sm:text-base text-gray-600">faster than previous Preline versions</p>
-            </li>
-          </ul>
-        </div>
+    <div class="mt-10 lg:mt-0 lg:col-span-6 lg:col-end-13">
+      <div class="space-y-6 sm:space-y-8">
+        <ul class="grid grid-cols-2 divide-y-2 divide-x-2 divide-base-content/15 overflow-hidden">
+          {
+            blok.stats &&
+              blok.stats.map((stat) => (
+                <li class="flex flex-col -m-0.5 p-4 sm:p-8">
+                  <div class="flex items-end gap-x-2 text-3xl sm:text-5xl font-bold text-base-content/75 mb-2">
+                    {stat.icon?.filename.endsWith('.svg') ? (
+                      <span class="text-accent">
+                        <InlineSvg src={stat.icon.filename} />
+                      </span>
+                    ) : (
+                      ''
+                    )}
+                    {stat.value}
+                  </div>
+                  <p class="text-sm sm:text-base text-base-content/95">
+                    <RichText content={stat.description} />
+                  </p>
+                </li>
+              ))
+          }
+        </ul>
       </div>
     </div>
   </div>
