@@ -84,8 +84,8 @@ const { blok } = Astro.props
           <button type="submit" class="btn btn-accent">Envoyer</button>
         </div>
 
-        <div class="mt-3 text-center">
-          <p class="text-sm text-base-content/50"><RichText content={blok.info} /></p>
+        <div class="mt-3 text-center text-xs text-base-content/50">
+          <RichText content={blok.info} />
         </div>
       </form>
     </div>
