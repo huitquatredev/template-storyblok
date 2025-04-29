@@ -4,7 +4,7 @@ import NetlifyImage from './utils/NetlifyImage.astro'
 const { blok } = Astro.props
 ---
 
-<section class="container" {...storyblokEditable(blok)}>
+<section class="container" {...storyblokEditable(blok)} data-aos="fade-up" data-aos-duration="1500">
   <div class="masonry max-w-full js-masonry">
     <div class="masonry__loader" aria-hidden="true">
       <svg

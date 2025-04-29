@@ -18,7 +18,7 @@ bgImgUrl.searchParams.set('url', blok?.image.filename)
     blok.layout === 'center' && !blok.image && (
       <div class="hero min-h-screen">
         <div class="hero-content container text-center">
-          <div class={'rich-text ' + foregroundColor}>
+          <div class={'rich-text ' + foregroundColor} data-aos="zoom-in">
             <RichText content={blok.content} />
           </div>
         </div>
@@ -30,7 +30,7 @@ bgImgUrl.searchParams.set('url', blok?.image.filename)
       <div id="hero-bg" class="hero min-h-screen" style={`background-image: url(${bgImgUrl});`}>
         <div class="hero-overlay" />
         <div class="hero-content container text-center">
-          <div class={'rich-text ' + foregroundColor}>
+          <div class={'rich-text ' + foregroundColor} data-aos="zoom-in">
             <RichText content={blok.content} />
           </div>
         </div>
@@ -43,13 +43,15 @@ bgImgUrl.searchParams.set('url', blok?.image.filename)
         <div
           class={`hero-content container flex-col ${blok.reversed ? 'lg:flex-row-reverse' : 'lg:flex-row'} justify-center items-center`}>
           {blok.image && (
-            <NetlifyImage
-              src={blok.image.filename}
-              alt={blok.image.alt}
-              class="max-w-full sm:max-w-sm md:max-w-md rounded-lg shadow-2xl"
-            />
+            <div data-aos={blok.reversed ? 'fade-left' : 'fade-right'} data-aos-delay="300">
+              <NetlifyImage
+                src={blok.image.filename}
+                alt={blok.image.alt}
+                class="max-w-full sm:max-w-sm md:max-w-md rounded-lg shadow-2xl"
+              />
+            </div>
           )}
-          <div class={'rich-text ' + foregroundColor}>
+          <div class={'rich-text ' + foregroundColor} data-aos={blok.reversed ? 'fade-right' : 'fade-left'}>
             <RichText content={blok.content} />
           </div>
         </div>

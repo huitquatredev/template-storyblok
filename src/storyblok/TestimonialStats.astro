@@ -11,14 +11,14 @@ const { blok } = Astro.props
       <div class="mb-8">
         {
           blok.title && (
-            <div class="my-4">
+            <div class="mt-4 mb-16" data-aos="fade-down">
               <RichText content={blok.title} />
             </div>
           )
         }
         {
           blok.quote && (
-            <blockquote class="relative mt-8">
+            <blockquote class="relative mt-8" data-aos="fade-up">
               <svg
                 class="absolute top-0 start-0 transform -translate-x-6 -translate-y-8 size-16 text-base-content/15"
                 width="16"
@@ -53,10 +53,10 @@ const { blok } = Astro.props
 
     <div class="mt-10 lg:mt-0 lg:col-span-6 lg:col-end-13">
       <div class="space-y-6 sm:space-y-8">
-        <ul class="grid grid-cols-2 divide-y-2 divide-x-2 divide-base-content/15 overflow-hidden">
+        <ul class="grid grid-cols-2 divide-y-2 divide-x-2 divide-base-content/15 overflow-hidden" data-aos="fade-up">
           {
             blok.stats &&
-              blok.stats.map((stat) => (
+              blok.stats.map((stat, idx) => (
                 <li class="flex flex-col -m-0.5 p-4 sm:p-8">
                   <div class="flex items-end gap-x-2 text-3xl sm:text-5xl font-bold text-base-content/75 mb-2">
                     {stat.icon?.filename.endsWith('.svg') ? (

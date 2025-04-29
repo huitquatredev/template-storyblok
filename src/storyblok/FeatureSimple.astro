@@ -5,7 +5,7 @@ import RichText from './utils/RichText.astro'
 const { blok } = Astro.props
 ---
 
-<section class="container" {...storyblokEditable(blok)}>
+<section class="container" {...storyblokEditable(blok)} data-aos="fade-up">
   <div class="md:grid md:grid-cols-2 md:items-center md:gap-12 xl:gap-32">
     <div>
       <NetlifyImage src={blok.image.filename} alt={blok.image.alt} class="rounded-xl" />

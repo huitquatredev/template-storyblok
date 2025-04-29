@@ -36,7 +36,7 @@ let logo = {
     ogImageAlt={ogImageAlt}
     schema={schema}
   />
-  <body class="is-loading">
+  <body class="is-loading overflow-x-hidden">
     <NavBar logo={logo} name="myCompany" menu={menu} breakpoint="sm" />
     <main>
       <slot />
@@ -45,17 +45,14 @@ let logo = {
 
     <script>
       import 'preline/dist/preline.js'
-    </script>
-
-    <script>
       import Lenis from 'lenis'
       import AOS from 'aos'
 
       AOS.init({
-        offset: 200,
-        duration: 600,
-        easing: 'ease-in-sine',
-        delay: 100
+        offset: 50,
+        duration: 500,
+        easing: 'ease-out-quad',
+        anchorPlacement: 'top-bottom'
       })
 
       const scrollwrapper = document.querySelector('html')

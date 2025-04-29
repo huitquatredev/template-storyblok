@@ -7,7 +7,7 @@ import InlineSvg from './utils/InlineSvg.astro'
 const { blok } = Astro.props
 ---
 
-<section class="container" {...storyblokEditable(blok)}>
+<section class="container" {...storyblokEditable(blok)} data-aos="fade-up">
   <div class="max-w-xl mx-auto mb-8">
     {
       blok.title && (

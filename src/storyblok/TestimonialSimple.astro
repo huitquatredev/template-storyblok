@@ -6,7 +6,7 @@ import InlineSvg from './utils/InlineSvg.astro'
 const { blok } = Astro.props
 ---
 
-<section class="container relative" {...storyblokEditable(blok)}>
+<section class="container relative" {...storyblokEditable(blok)} data-aos="fade-up">
   <blockquote class="text-center lg:mx-auto lg:w-3/5">
     {
       blok.image?.filename.endsWith('.svg') && (

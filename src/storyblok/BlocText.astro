@@ -5,7 +5,7 @@ import Heading from './utils/Heading.astro'
 const { blok } = Astro.props
 ---
 
-<section class="relative z-[1] container" {...storyblokEditable(blok)}>
+<section class="relative z-[1] container" {...storyblokEditable(blok)} data-aos="fade-up">
   <p
     class="text-sm text-base-content/50 capitalize mb-6 lg:mb-8 flex gap-4 items-center after:content-[''] after:h-px after:grow after:bg-base-content/50">
     {blok.tagline}
