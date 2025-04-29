@@ -54,6 +54,10 @@ export default defineConfig({
         blocText: "storyblok/BlocText",
         stepsRows: "storyblok/StepsRows",
         stepsCols: "storyblok/StepsCols",
+        testimonialSimple: "storyblok/TestimonialSimple",
+        testimonialsMultiple: "storyblok/TestimonialsMultiple",
+        team: "storyblok/Team",
+        horizontalGallery: "storyblok/GalleryHorizontal",
       },
     }),
     sitemap({

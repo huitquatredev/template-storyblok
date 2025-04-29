@@ -1,0 +1,37 @@
+---
+import { storyblokEditable } from '@storyblok/astro'
+import RichText from './utils/RichText.astro'
+import NetlifyImage from './utils/NetlifyImage.astro'
+const { blok } = Astro.props
+---
+
+<section class="container" {...storyblokEditable(blok)}>
+  <div class="max-w-xl mx-auto text-center lg:text-balance">
+    <RichText content={blok.title} />
+  </div>
+  <ul
+    role="list"
+    class="mt-12 text-center grid sm:grid-cols-2 md:grid-cols-3 lg:divide-x divide-base-content/50 lg:grid-cols-4 lg:mt-24">
+    {
+      blok.team?.map((person) => (
+        <li class="p-8">
+          <div class="flex flex-col gap-4">
+            {person.image?.filename && (
+              <NetlifyImage
+                src={person.image.filename}
+                alt={person.image.alt}
+                class="object-cover mx-auto rounded-full size-16 lg:size-20"
+              />
+            )}
+            {(person.nom || person.fonction) && (
+              <footer class="mt-6">
+                {person.nom && <div class="font-semibold">{person.nom}</div>}
+                {person.fonction && <div class="text-sm text-base-content/95">{person.fonction}</div>}
+              </footer>
+            )}
+          </div>
+        </li>
+      ))
+    }
+  </ul>
+</section>
