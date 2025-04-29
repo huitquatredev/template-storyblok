@@ -58,6 +58,7 @@ export default defineConfig({
         testimonialsMultiple: "storyblok/TestimonialsMultiple",
         team: "storyblok/Team",
         horizontalGallery: "storyblok/GalleryHorizontal",
+        masonryGallery: "storyblok/GalleryMasonry",
       },
     }),
     sitemap({
