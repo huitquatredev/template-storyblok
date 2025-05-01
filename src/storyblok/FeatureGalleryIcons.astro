@@ -17,7 +17,7 @@ blok.icons?.map((icon) => {
 <section class="container" {...storyblokEditable(blok)}>
   {
     blok.content && (
-      <div class="mx-auto max-w-2xl mb-8 lg:mb-14 text-center" data-aos="fade-left">
+      <div class="mx-auto max-w-2xl mb-8 lg:mb-14 text-center" data-aos="fade-up">
         <RichText content={blok.content} />
       </div>
     )
@@ -28,7 +28,7 @@ blok.icons?.map((icon) => {
       blok.icons?.map((icon, idx) => (
         <div
           class="text-center flex flex-col justify-center items-center"
-          data-aos="fade-right"
+          data-aos="fade-down"
           data-aos-duration={500 + idx * 250}>
           {icon.image.isSvg && <InlineSvg src={icon.image.filename} />}
           {!icon.image.isSvg && <NetlifyImage src={icon.image.filename} alt={icon.image.alt} class="w-12 rounded-lg" />}
@@ -42,7 +42,7 @@ blok.icons?.map((icon) => {
   <div class="mt-10 sm:mt-20 grid grid-cols-2 md:grid-cols-4 items-center gap-2 sm:gap-6 lg:gap-8">
     {
       blok.images?.map((image, idx) => (
-        <div class="w-full h-32" data-aos="fade-right" data-aos-duration={500 + idx * 300}>
+        <div class="w-full h-32" data-aos="fade-up" data-aos-duration={500 + idx * 300}>
           <NetlifyImage src={image.filename} alt={image.alt} class="size-full object-cover object-center rounded-xl" />
         </div>
       ))
