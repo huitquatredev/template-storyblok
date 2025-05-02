@@ -2,23 +2,53 @@
 import Head from '../storyblok/global/Head.astro'
 import Footer from '../storyblok/global/Footer.astro'
 import NavBar from '../storyblok/global/NavBar.astro'
+import { useStoryblokApi } from '@storyblok/astro'
+import isPreview from '../utils/isPreview'
+import { languages } from '../utils/langs'
+import { undefined } from 'astro:schema'
+
+const storyblokApi = useStoryblokApi()
+const { data } = await storyblokApi.get('cdn/stories/global/navigation', {
+  version: isPreview() ? 'draft' : 'published',
+  resolve_relations: 'menuItem.page,footerItem.page'
+})
+
+const menu = data.story.content.menu.map((item) => {
+  //Simple item, no submenu
+  if (item.page.length === 1) {
+    return {
+      name: item.Nom,
+      slug: item.page[0].full_slug === 'home' ? '/' : '/' + item.page[0].full_slug,
+      submenu: []
+    }
+  } else {
+    //Submenu item
+    return {
+      name: item.Nom,
+      slug: null,
+      submenu: item.page.map((subitem) => {
+        return {
+          name: subitem.name,
+          slug: '/' + subitem.full_slug
+        }
+      })
+    }
+  }
+})
+
+const footer = data.story.content.footer.map((item) => {
+  return {
+    name: item.Nom,
+    pages: item.page.map((subitem) => {
+      return {
+        name: subitem.name,
+        slug: subitem.full_slug === 'home' ? '/' : '/' + subitem.full_slug
+      }
+    })
+  }
+})
 
 const { title, description, canonical, robots, ogImage, ogImageAlt, schema } = Astro.props
-
-let menu = [
-  {
-    name: 'item1',
-    href: '/item-1'
-  },
-  {
-    name: 'item2',
-    href: '/item-2'
-  },
-  {
-    name: 'item3',
-    href: '/item-3'
-  }
-]
 
 let logo = {
   src: 'https://picsum.photos/400/200',
@@ -41,7 +71,16 @@ let logo = {
     <main>
       <slot />
     </main>
-    <Footer />
+    <a
+      class="back-to-top h-12 w-12 flex fixed right-8 bottom-8 z-10 rounded-full bg-base-300 text-base-content hover:text-base-300 invisible opacity-0 transition-all hover:bg-base-content [&.back-to-top--is-visible]:visible [&.back-to-top--is-visible]:opacity-100 js-back-to-top"
+      href="#"
+      data-offset="100">
+      <svg class="h-5 w-5 block m-auto stroke-current leading-none" viewBox="0 0 20 20">
+        <polyline points="2 13 10 5 18 13" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2">
+        </polyline>
+      </svg>
+    </a>
+    <Footer logo={logo} name="myCompany" menu={footer} />
 
     <script>
       import 'preline/dist/preline.js'
@@ -70,24 +109,99 @@ let logo = {
       }
 
       requestAnimationFrame(raf)
+      ;(function () {
+        var backTop = document.getElementsByClassName('js-back-to-top')[0]
+        if (backTop) {
+          var dataElement = backTop.getAttribute('data-element')
+          var scrollElement = dataElement ? document.querySelector(dataElement) : window
+          var scrollOffsetInit =
+              parseInt(backTop.getAttribute('data-offset-in')) || parseInt(backTop.getAttribute('data-offset')) || 0, //show back-to-top if scrolling > scrollOffset
+            scrollOffsetOutInit = parseInt(backTop.getAttribute('data-offset-out')) || 0,
+            scrollOffset = 0,
+            scrollOffsetOut = 0,
+            scrolling = false
 
-      const mediaQueryList = window.matchMedia('(min-width: 1024px)')
-      if (mediaQueryList.matches) {
-        document.body.classList.add('is-large')
-        document.body.classList.remove('is-narrow')
-      } else {
-        document.body.classList.add('is-narrow')
-        document.body.classList.remove('is-large')
-      }
-      mediaQueryList.addEventListener('change', (e) => {
-        if (e.matches) {
-          document.body.classList.add('is-large')
-          document.body.classList.remove('is-narrow')
-        } else {
-          document.body.classList.add('is-narrow')
-          document.body.classList.remove('is-large')
+          // check if target-in/target-out have been set
+          var targetIn = backTop.getAttribute('data-target-in')
+              ? document.querySelector(backTop.getAttribute('data-target-in'))
+              : false,
+            targetOut = backTop.getAttribute('data-target-out')
+              ? document.querySelector(backTop.getAttribute('data-target-out'))
+              : false
+
+          updateOffsets()
+
+          //detect click on back-to-top link
+          backTop.addEventListener('click', function (event) {
+            event.preventDefault()
+            if (!window.requestAnimationFrame) {
+              scrollElement.scrollTo(0, 0)
+            } else {
+              dataElement
+                ? scrollElement.scrollTo({ top: 0, behavior: 'smooth' })
+                : window.scrollTo({ top: 0, behavior: 'smooth' })
+            }
+            //move the focus to the #top-element - don't break keyboard navigation
+            moveFocus(document.getElementById(backTop.getAttribute('href').replace('#', '')))
+          })
+
+          //listen to the window scroll and update back-to-top visibility
+          checkBackToTop()
+          if (scrollOffset > 0 || scrollOffsetOut > 0) {
+            scrollElement.addEventListener('scroll', function (event) {
+              if (!scrolling) {
+                scrolling = true
+                !window.requestAnimationFrame
+                  ? setTimeout(function () {
+                      checkBackToTop()
+                    }, 250)
+                  : window.requestAnimationFrame(checkBackToTop)
+              }
+            })
+          }
+
+          function checkBackToTop() {
+            updateOffsets()
+            var windowTop = scrollElement.scrollTop || document.documentElement.scrollTop
+            if (!dataElement) windowTop = window.scrollY || document.documentElement.scrollTop
+            var condition = windowTop >= scrollOffset
+            if (scrollOffsetOut > 0) {
+              condition = windowTop >= scrollOffset && window.innerHeight + windowTop < scrollOffsetOut
+            }
+            backTop.classList.toggle('back-to-top--is-visible', condition)
+            scrolling = false
+          }
+
+          function updateOffsets() {
+            scrollOffset = getOffset(targetIn, scrollOffsetInit, true)
+            scrollOffsetOut = getOffset(targetOut, scrollOffsetOutInit)
+          }
+
+          function getOffset(target, startOffset, bool) {
+            var offset = 0
+            if (target) {
+              var windowTop = scrollElement.scrollTop || document.documentElement.scrollTop
+              if (!dataElement) windowTop = window.scrollY || document.documentElement.scrollTop
+              var boundingClientRect = target.getBoundingClientRect()
+              offset = bool ? boundingClientRect.bottom : boundingClientRect.top
+              offset = offset + windowTop
+            }
+            if (startOffset && startOffset) {
+              offset = offset + parseInt(startOffset)
+            }
+            return offset
+          }
+
+          function moveFocus(element) {
+            if (!element) element = document.getElementsByTagName('body')[0]
+            element.focus()
+            if (document.activeElement !== element) {
+              element.setAttribute('tabindex', '-1')
+              element.focus()
+            }
+          }
         }
-      })
+      })()
     </script>
   </body>
 </html>

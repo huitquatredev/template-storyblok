@@ -7,8 +7,6 @@ const { blok } = Astro.props
 
 let foregroundColor = blok.foregroundColorInvert ? 'text-base-100' : 'text-base-content'
 
-console.log(foregroundColor)
-
 let bgImgUrl = new URL('.netlify/images', Astro.site)
 bgImgUrl.searchParams.set('url', blok?.image.filename)
 ---

@@ -1,6 +1,6 @@
 ---
-const { src } = Astro.props
+const { src, class: classList } = Astro.props
 const innerHTML = fetch(src).then((res) => res.text())
 ---
 
-<span class="fill-current stroke-current"><Fragment set:html={innerHTML} /></span>
+<span class=`fill-current stroke-current ${classList}`><Fragment set:html={innerHTML} /></span>
