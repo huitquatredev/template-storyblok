@@ -4,8 +4,6 @@ import Footer from '../storyblok/global/Footer.astro'
 import NavBar from '../storyblok/global/NavBar.astro'
 import { useStoryblokApi } from '@storyblok/astro'
 import isPreview from '../utils/isPreview'
-import { languages } from '../utils/langs'
-import { undefined } from 'astro:schema'
 
 const storyblokApi = useStoryblokApi()
 const { data } = await storyblokApi.get('cdn/stories/global/navigation', {
