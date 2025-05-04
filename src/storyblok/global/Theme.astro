@@ -1,0 +1,108 @@
+---
+const { blok } = Astro.props
+
+console.log(blok)
+---
+
+<section class="bg-[var(--color-base-200)] p-4">
+  <section class="prose container">
+    <h1 class="text-black">Thème du site</h1>
+    <h2 class="text-black">Couleurs</h2>
+    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
+      <div
+        class="card h-64 grid place-content-center font-bold text-xl md:text-2xl xl:text-3xl shadow-xl"
+        style=`background-color: ${blok?.base || '#000'}; color: ${blok?.baseContent || "#FFF"}`>
+        Base
+      </div>
+      <div
+        class="card h-64 grid place-content-center font-bold text-xl md:text-2xl xl:text-3xl shadow-xl"
+        style=`background-color: ${blok?.primary || '#000'}; color: ${blok?.primaryContent || "#FFF"}`>
+        Primaire
+      </div>
+      <div
+        class="card h-64 grid place-content-center font-bold text-xl md:text-2xl xl:text-3xl shadow-xl"
+        style=`background-color: ${blok?.secondary || '#000'}; color: ${blok?.secondaryContent || "#FFF"}`>
+        Secondaire
+      </div>
+      <div
+        class="card h-64 grid place-content-center font-bold text-xl md:text-2xl xl:text-3xl shadow-xl"
+        style=`background-color: ${blok?.accent || '#000'}; color: ${blok?.accentContent || "#FFF"}`>
+        Accent
+      </div>
+      <div
+        class="card h-64 grid place-content-center font-bold text-xl md:text-2xl xl:text-3xl shadow-xl"
+        style=`background-color: ${blok?.neutral || '#000'}; color: ${blok?.neutralContent || "#FFF"}`>
+        Neutral
+      </div>
+    </div>
+    <div class="mt-8 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4">
+      <div
+        class="card h-64 grid place-content-center font-bold text-xl md:text-2xl xl:text-3xl shadow-xl"
+        style=`background-color: ${blok?.info || '#000'}; color: ${blok?.infoContent || "#FFF"}`>
+        Info
+      </div>
+      <div
+        class="card h-64 grid place-content-center font-bold text-xl md:text-2xl xl:text-3xl shadow-xl"
+        style=`background-color: ${blok?.success || '#000'}; color: ${blok?.successContent || "#FFF"}`>
+        Succès
+      </div>
+      <div
+        class="card h-64 grid place-content-center font-bold text-xl md:text-2xl xl:text-3xl shadow-xl"
+        style=`background-color: ${blok?.warning || '#000'}; color: ${blok?.warningContent || "#FFF"}`>
+        Avertissement
+      </div>
+      <div
+        class="card h-64 grid place-content-center font-bold text-xl md:text-2xl xl:text-3xl shadow-xl"
+        style=`background-color: ${blok?.error || '#000'}; color: ${blok?.errorContent || "#FFF"}`>
+        Erreur
+      </div>
+    </div>
+    <h2 class="text-black">Arrondis</h2>
+    <div class="grid place-content-center">
+      <div class="card bg-base-300 w-96 shadow-sm">
+        <figure class="mt-0">
+          <img src="https://img.daisyui.com/images/stock/photo-1606107557195-0e29a4b5b4aa.webp" alt="Shoes" />
+        </figure>
+        <div class="card-body">
+          <h2 class="card-title">Card Title</h2>
+          <p>A card component has a figure, a body part, and inside body there are title and actions parts</p>
+          <div class="card-actions justify-end">
+            <button class="btn btn-primary">Buy Now</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</section>
+
+<!-- {
+  _uid: '5416af8e-0eb1-48cc-95e4-29c0dde12a70',
+  base: '#FFFFFF',
+  info: '#00bafe',
+  depth: false,
+  error: '#ff637d',
+  noise: false,
+  accent: '#00d3bb',
+  neutral: '#09090b',
+  primary: '#422ad5',
+  success: '#00d390',
+  warning: '#fcb700',
+  component: 'theme',
+  secondary: '#f43098',
+  fieldsSize: '4',
+  baseContent: '#18181b',
+  bordersSize: '1',
+  boxesRadius: '',
+  infoContent: '#042e49',
+  errorContent: '#4d0218',
+  fieldsRadius: '',
+  accentContent: '#084d49',
+  selectorsSize: '4',
+  neutralContent: '#e4e4e7',
+  primaryContent: '#e0e7ff',
+  successContent: '#004c39',
+  warningContent: '#793205',
+  selectorsRadius: '',
+  secondaryContent: '#f9e4f0',
+}
+-->

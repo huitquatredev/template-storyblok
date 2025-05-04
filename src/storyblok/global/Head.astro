@@ -3,9 +3,91 @@
 // FUTUR : manage other og:type (article, product, profile, website)
 // TODO : change ICBM Geo localisation
 
+import { useStoryblokApi } from '@storyblok/astro'
+import isPreview from '../../utils/isPreview'
+
+import { converter, formatCss } from 'culori'
+
 import '../../styles/tailwind.css'
 import '../../styles/aos.css'
 import '../../styles/utils.css'
+
+const storyblokApi = useStoryblokApi()
+const { data } = await storyblokApi.get('cdn/stories/global/theme', {
+  version: isPreview() ? 'draft' : 'published'
+})
+
+const theme = data.story.content
+
+let oklch = converter('oklch')
+
+/*@plugin "daisyui/theme" {
+  name: "pastel";
+  default: false;
+  prefersdark: false;
+  color-scheme: "light";
+  --color-base-100: oklch(100% 0 0);
+  --color-base-200: oklch(98.462% 0.001 247.838);
+  --color-base-300: oklch(92.462% 0.001 247.838);
+  --color-base-content: oklch(20% 0 0);
+  --color-primary: oklch(90% 0.063 306.703);
+  --color-primary-content: oklch(49% 0.265 301.924);
+  --color-secondary: oklch(89% 0.058 10.001);
+  --color-secondary-content: oklch(51% 0.222 16.935);
+  --color-accent: oklch(90% 0.093 164.15);
+  --color-accent-content: oklch(50% 0.118 165.612);
+  --color-neutral: oklch(55% 0.046 257.417);
+  --color-neutral-content: oklch(92% 0.013 255.508);
+  --color-info: oklch(86% 0.127 207.078);
+  --color-info-content: oklch(52% 0.105 223.128);
+  --color-success: oklch(87% 0.15 154.449);
+  --color-success-content: oklch(52% 0.154 150.069);
+  --color-warning: oklch(83% 0.128 66.29);
+  --color-warning-content: oklch(55% 0.195 38.402);
+  --color-error: oklch(80% 0.114 19.571);
+  --color-error-content: oklch(50% 0.213 27.518);
+  --radius-selector: 1rem;
+  --radius-field: 2rem;
+  --radius-box: 1rem;
+  --size-selector: 0.25rem;
+  --size-field: 0.25rem;
+  --border: 2px;
+  --depth: 0;
+  --noise: 0;
+} */
+
+let css = `
+  :root {
+    --color-base-100: ${formatCss(oklch(theme.base))};
+    --color-base-200: oklch(${oklch(theme.base).l > 0.5 ? oklch(theme.base).l * 0.95 : oklch(theme.base).l * 1.05} ${oklch(theme.base).c} ${oklch(theme.base).h ? oklch(theme.base).h : 0});
+    --color-base-300: oklch(${oklch(theme.base).l > 0.5 ? oklch(theme.base).l * 0.9 : oklch(theme.base).l * 1.1} ${oklch(theme.base).c} ${oklch(theme.base).h ? oklch(theme.base).h : 0});
+    --color-base-content: ${formatCss(oklch(theme.baseContent))};
+    --color-primary: ${formatCss(oklch(theme.primary))};
+    --color-primary-content: ${formatCss(oklch(theme.primaryContent))};
+    --color-secondary: ${formatCss(oklch(theme.secondary))};
+    --color-secondary-content: ${formatCss(oklch(theme.secondaryContent))};
+    --color-accent: ${formatCss(oklch(theme.accent))};
+    --color-accent-content: ${formatCss(oklch(theme.accentContent))};
+    --color-neutral: ${formatCss(oklch(theme.neutral))};
+    --color-neutral-content: ${formatCss(oklch(theme.neutralContent))};
+    --color-info: ${formatCss(oklch(theme.info))};
+    --color-info-content: ${formatCss(oklch(theme.infoContent))};
+    --color-success: ${formatCss(oklch(theme.success))};
+    --color-success-content: ${formatCss(oklch(theme.successContent))};
+    --color-warning: ${formatCss(oklch(theme.warning))};
+    --color-warning-content: ${formatCss(oklch(theme.warningContent))};
+    --color-error: ${formatCss(oklch(theme.error))};
+    --color-error-content: ${formatCss(oklch(theme.errorContent))};
+    --radius-selector: ${theme.selectorsRadius};
+    --radius-field: ${theme.fieldsRadius};
+    --radius-box: ${theme.boxesRadius};
+    --size-selector: ${theme.selectorsSize};
+    --size-field: ${theme.fieldsSize};
+    --border: ${theme.bordersSize};
+    --depth: ${theme.depth ? '1' : '0'};
+    --noise: ${theme.noise ? '1' : '0'};
+  }
+`
 
 const {
   title,
@@ -59,6 +141,8 @@ const {
   <meta name="geo.position" content="44.1913531618265; 4.777555750329484" />
   <meta name="geo.region" content="FR" />
   <meta name="geo.placename" content="Piolenc" />
+
+  <style set:html={css}></style>
 
   {schema && <script type="application/ld+json" set:html={schema} />}
 

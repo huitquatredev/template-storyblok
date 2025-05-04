@@ -41,6 +41,7 @@ export default defineConfig({
       bridge: env.STORYBLOK_IS_PREVIEW === "yes",
       components: {
         page: "storyblok/Page",
+        theme: "storyblok/global/Theme",
         hero: "storyblok/Hero",
         featureSimple: "storyblok/FeatureSimple",
         featureGalleryIcons: "storyblok/FeatureGalleryIcons",
