@@ -31,7 +31,9 @@ blok.icons?.map((icon) => {
           data-aos="fade-down"
           data-aos-duration={500 + idx * 250}>
           {icon.image.isSvg && <InlineSvg src={icon.image.filename} />}
-          {!icon.image.isSvg && <NetlifyImage src={icon.image.filename} alt={icon.image.alt} class="w-12 rounded-lg" />}
+          {!icon.image.isSvg && (
+            <NetlifyImage src={icon.image.filename} alt={icon.image.alt} class="w-12 rounded-[var(--radius-box)]" />
+          )}
           <div class="mt-2 sm:mt-6">
             <Heading classlist="sm:text-lg font-semibold" tag={icon.tag} content={icon.title} />
           </div>
@@ -43,7 +45,11 @@ blok.icons?.map((icon) => {
     {
       blok.images?.map((image, idx) => (
         <div class="w-full h-32" data-aos="fade-up" data-aos-duration={500 + idx * 300}>
-          <NetlifyImage src={image.filename} alt={image.alt} class="size-full object-cover object-center rounded-xl" />
+          <NetlifyImage
+            src={image.filename}
+            alt={image.alt}
+            class="size-full object-cover object-center rounded-[var(--radius-box)]"
+          />
         </div>
       ))
     }

@@ -10,7 +10,7 @@ const { blok } = Astro.props
       {
         blok.gallery?.map((img) => (
           <li class="drag-gallery__item">
-            <NetlifyImage src={img.filename} alt={img.alt} />
+            <NetlifyImage src={img.filename} alt={img.alt} class="rounded-[var(--radius-box)]" />
           </li>
         ))
       }

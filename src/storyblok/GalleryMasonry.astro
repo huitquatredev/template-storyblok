@@ -21,7 +21,7 @@ const { blok } = Astro.props
       {
         blok.gallery?.map((img) => (
           <li class="masonry__item js-masonry__item">
-            <NetlifyImage src={img.filename} alt={img.alt} class="block w-full" />
+            <NetlifyImage src={img.filename} alt={img.alt} class="block w-full rounded-[var(--radius-box)]" />
           </li>
         ))
       }

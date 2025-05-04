@@ -20,7 +20,7 @@ const { blok } = Astro.props
               <NetlifyImage
                 src={person.image.filename}
                 alt={person.image.alt}
-                class="object-cover mx-auto rounded-full size-16 lg:size-20"
+                class="object-cover mx-auto rounded-[var(--radius-box)] size-16 lg:size-20"
               />
             )}
             {(person.nom || person.fonction) && (

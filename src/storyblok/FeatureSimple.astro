@@ -7,9 +7,9 @@ const { blok } = Astro.props
 
 <section class="container" {...storyblokEditable(blok)} data-aos="fade-up">
   <div class="md:grid md:grid-cols-2 md:items-center md:gap-12 xl:gap-32">
-    <div>
-      <NetlifyImage src={blok.image.filename} alt={blok.image.alt} class="rounded-xl" />
-    </div>
+    <figure>
+      <NetlifyImage src={blok.image.filename} alt={blok.image.alt} class="rounded-[var(--radius-box)]" />
+    </figure>
 
     <div class="mt-5 sm:mt-10 lg:mt-0">
       <div class="space-y-6 sm:space-y-8">

@@ -12,4 +12,8 @@
   :where(section) {
     @apply my-16;
   }
+
+  html {
+    text-decoration-skip-ink: none;
+  }
 }

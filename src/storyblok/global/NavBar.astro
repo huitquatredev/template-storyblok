@@ -10,8 +10,8 @@ const currentPath = Astro.url.pathname
     class="relative max-w-[85rem] w-full mx-auto md:flex md:items-center md:justify-between md:gap-3 py-2 px-4 sm:px-6 lg:px-8">
     <div class="flex justify-between items-center gap-x-1">
       <a class="flex-none font-semibold text-xl focus:outline-hidden focus:opacity-80" href="/" aria-label={name}>
-        {logo.src.endsWith('.svg') && <InlineSvg src={logo.src} class="h-auto w-16" />}
-        {!logo.src.endsWith('.svg') && <NetlifyImage src={logo.src} alt={name} class="h-auto w-16" />}
+        {logo.filename.endsWith('.svg') && <InlineSvg src={logo.filename} class="h-auto w-32" />}
+        {!logo.filename.endsWith('.svg') && <NetlifyImage src={logo.filename} alt={name} class="h-auto w-32" />}
       </a>
 
       <!-- Collapse Button -->
@@ -75,7 +75,7 @@ const currentPath = Astro.url.pathname
                         <button
                           id="hs-header-base-dropdown"
                           type="button"
-                          class="hs-dropdown-toggle w-full p-2 flex items-center text-sm text-base-content hover:bg-base-content hover:text-base-300 rounded-lg focus:outline-hidden focus:bg-base-content focus:text-base-300"
+                          class="hs-dropdown-toggle w-full p-2 flex items-center text-base-content hover:bg-base-content hover:text-base-300 rounded-lg focus:outline-hidden focus:bg-base-content focus:text-base-300"
                           aria-haspopup="menu"
                           aria-expanded="false"
                           aria-label="Sous-menu">
@@ -108,7 +108,7 @@ const currentPath = Astro.url.pathname
                                     <a
                                       href={subitem.slug}
                                       aria-current="page"
-                                      class="p-2 flex items-center text-sm bg-base-300 text-base-content hover:bg-base-300 rounded-lg focus:outline-hidden focus:bg-base-300">
+                                      class="p-2 flex items-center bg-base-300 underline decoration-accent text-base-content hover:bg-base-300 rounded-lg focus:outline-hidden focus:bg-base-300">
                                       {subitem.name}
                                     </a>
                                   </div>
@@ -118,7 +118,7 @@ const currentPath = Astro.url.pathname
                                   <div>
                                     <a
                                       href={subitem.slug}
-                                      class="p-2 flex items-center text-sm text-base-content hover:bg-base-content hover:text-base-300 rounded-lg focus:outline-hidden focus:bg-base-content">
+                                      class="p-2 flex items-center text-base-content hover:bg-base-content hover:text-base-300 rounded-lg focus:outline-hidden focus:bg-base-content">
                                       {subitem.name}
                                     </a>
                                   </div>
@@ -136,7 +136,7 @@ const currentPath = Astro.url.pathname
                           <a
                             href={item.slug}
                             aria-current="page"
-                            class="p-2 flex items-center underline decoration-4 decoration-accent underlin text-sm text-base-content hover:bg-base-300 rounded-lg focus:outline-hidden focus:bg-base-300">
+                            class="p-2 flex items-center underline decoration-4 decoration-accent text-base-content hover:bg-base-300 rounded-lg focus:outline-hidden focus:bg-base-300">
                             {item.name}
                           </a>
                         </li>
@@ -146,7 +146,7 @@ const currentPath = Astro.url.pathname
                         <li>
                           <a
                             href={item.slug}
-                            class="p-2 flex items-center text-sm text-base-content hover:bg-base-content hover:text-base-300 rounded-lg focus:outline-hidden focus:bg-base-content">
+                            class="p-2 flex items-center text-base-content hover:bg-base-content hover:text-base-300 rounded-lg focus:outline-hidden focus:bg-base-content">
                             {item.name}
                           </a>
                         </li>

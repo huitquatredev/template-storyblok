@@ -19,8 +19,8 @@ const { blok } = Astro.props
   </div>
 
   <div class="grid grid-cols-1 lg:grid-cols-2 lg:items-center gap-6 md:gap-8 lg:gap-12">
-    <div class="overflow-hidden rounded-2xl">
-      <NetlifyImage class="object-cover max-h-80 rounded-2xl" src={blok.image.filename} alt={blok.image.alt} />
+    <div class="overflow-hidden rounded-[var(--radius-box)]">
+      <NetlifyImage class="object-cover max-h-80" src={blok.image.filename} alt={blok.image.alt} />
     </div>
 
     <div class="space-y-8 lg:space-y-16">

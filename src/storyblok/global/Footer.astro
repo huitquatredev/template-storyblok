@@ -7,8 +7,8 @@ const { logo, name, slogan, menu } = Astro.props
 
 <footer class="footer sm:footer-horizontal bg-base-200 text-base-content p-10 items-center justify-around">
   <aside>
-    {logo.src.endsWith('.svg') && <InlineSvg src={logo.src} alt={logo.alt} class="h-auto w-16" />}
-    {!logo.src.endsWith('.svg') && <NetlifyImage src={logo.src} alt={logo.alt} class="h-auto w-16" />}
+    {logo.filename.endsWith('.svg') && <InlineSvg src={logo.filename} class="h-auto w-32" />}
+    {!logo.filename.endsWith('.svg') && <NetlifyImage src={logo.filename} alt={logo.alt} class="h-auto w-32" />}
     <p>
       {name}
       <br />

@@ -48,10 +48,11 @@ const footer = data.story.content.footer.map((item) => {
 
 const { title, description, canonical, robots, ogImage, ogImageAlt, schema } = Astro.props
 
-let logo = {
-  src: 'https://picsum.photos/400/200',
-  alt: 'logo'
-}
+const { data: logoData } = await storyblokApi.get('cdn/stories/global/theme', {
+  version: isPreview() ? 'draft' : 'published'
+})
+
+const logo = logoData.story.content.logo
 ---
 
 <html lang="fr">
