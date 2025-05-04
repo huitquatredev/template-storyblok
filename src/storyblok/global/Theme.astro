@@ -1,73 +1,142 @@
 ---
 const { blok } = Astro.props
-
-console.log(blok)
 ---
 
-<section class="bg-[var(--color-base-200)] p-4">
+<section class="bg-[var(--color-base-100)] p-4">
   <section class="prose container">
     <h1 class="text-black">Thème du site</h1>
     <h2 class="text-black">Couleurs</h2>
     <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
       <div
-        class="card h-64 grid place-content-center font-bold text-xl md:text-2xl xl:text-3xl shadow-xl"
+        class="card card-border h-64 grid place-content-center font-bold text-xl md:text-2xl xl:text-3xl"
         style=`background-color: ${blok?.base || '#000'}; color: ${blok?.baseContent || "#FFF"}`>
         Base
       </div>
       <div
-        class="card h-64 grid place-content-center font-bold text-xl md:text-2xl xl:text-3xl shadow-xl"
+        class="card card-border h-64 grid place-content-center font-bold text-xl md:text-2xl xl:text-3xl"
         style=`background-color: ${blok?.primary || '#000'}; color: ${blok?.primaryContent || "#FFF"}`>
         Primaire
       </div>
       <div
-        class="card h-64 grid place-content-center font-bold text-xl md:text-2xl xl:text-3xl shadow-xl"
+        class="card card-border h-64 grid place-content-center font-bold text-xl md:text-2xl xl:text-3xl"
         style=`background-color: ${blok?.secondary || '#000'}; color: ${blok?.secondaryContent || "#FFF"}`>
         Secondaire
       </div>
       <div
-        class="card h-64 grid place-content-center font-bold text-xl md:text-2xl xl:text-3xl shadow-xl"
+        class="card card-border h-64 grid place-content-center font-bold text-xl md:text-2xl xl:text-3xl"
         style=`background-color: ${blok?.accent || '#000'}; color: ${blok?.accentContent || "#FFF"}`>
         Accent
       </div>
       <div
-        class="card h-64 grid place-content-center font-bold text-xl md:text-2xl xl:text-3xl shadow-xl"
+        class="card card-border h-64 grid place-content-center font-bold text-xl md:text-2xl xl:text-3xl"
         style=`background-color: ${blok?.neutral || '#000'}; color: ${blok?.neutralContent || "#FFF"}`>
-        Neutral
+        Neutre
       </div>
     </div>
     <div class="mt-8 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4">
       <div
-        class="card h-64 grid place-content-center font-bold text-xl md:text-2xl xl:text-3xl shadow-xl"
+        class="card card-border h-64 grid place-content-center font-bold text-xl md:text-2xl xl:text-3xl"
         style=`background-color: ${blok?.info || '#000'}; color: ${blok?.infoContent || "#FFF"}`>
         Info
       </div>
       <div
-        class="card h-64 grid place-content-center font-bold text-xl md:text-2xl xl:text-3xl shadow-xl"
+        class="card card-border h-64 grid place-content-center font-bold text-xl md:text-2xl xl:text-3xl"
         style=`background-color: ${blok?.success || '#000'}; color: ${blok?.successContent || "#FFF"}`>
         Succès
       </div>
       <div
-        class="card h-64 grid place-content-center font-bold text-xl md:text-2xl xl:text-3xl shadow-xl"
+        class="card card-border h-64 grid place-content-center font-bold text-xl md:text-2xl xl:text-3xl"
         style=`background-color: ${blok?.warning || '#000'}; color: ${blok?.warningContent || "#FFF"}`>
         Avertissement
       </div>
       <div
-        class="card h-64 grid place-content-center font-bold text-xl md:text-2xl xl:text-3xl shadow-xl"
+        class="card card-border h-64 grid place-content-center font-bold text-xl md:text-2xl xl:text-3xl"
         style=`background-color: ${blok?.error || '#000'}; color: ${blok?.errorContent || "#FFF"}`>
         Erreur
       </div>
     </div>
     <h2 class="text-black">Arrondis</h2>
-    <div class="grid place-content-center">
-      <div class="card bg-base-300 w-96 shadow-sm">
-        <figure class="mt-0">
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 justify-center">
+      <div class="card card-border bg-base-100 border-base-300 w-96 shadow-sm">
+        <figure class="mt-0 rounded-t-[var(--radius-box-inside)]">
           <img src="https://img.daisyui.com/images/stock/photo-1606107557195-0e29a4b5b4aa.webp" alt="Shoes" />
         </figure>
         <div class="card-body">
           <h2 class="card-title">Card Title</h2>
-          <p>A card component has a figure, a body part, and inside body there are title and actions parts</p>
-          <div class="card-actions justify-end">
-            <button class="btn btn-primary">Buy Now</button>
+          <p>
+            A card card-border component has a figure, a body part, and inside body there are title and actions parts
+          </p>
+          <div class="card card-actions justify-end">
+            <button class="btn btn-primary btn-lg py-1">Buy Now</button>
+          </div>
+        </div>
+      </div>
+      <div class="card card-border bg-base-100 border-base-300 overflow-hidden h-fit w-fit p-4 shadow-sm">
+        <div class="border-base-300 border-b border-dashed">
+          <div class="flex items-center gap-2 p-4">
+            <div class="grow">
+              <div class="flex items-center gap-2 text-sm font-medium">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke-width="1.5"
+                  stroke="currentColor"
+                  class="size-5 opacity-40">
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    d="M18 7.5v3m0 0v3m0-3h3m-3 0h-3m-2.25-4.125a3.375 3.375 0 1 1-6.75 0 3.375 3.375 0 0 1 6.75 0ZM3 19.235v-.11a6.375 6.375 0 0 1 12.75 0v.109A12.318 12.318 0 0 1 9.374 21c-2.331 0-4.512-.645-6.374-1.766Z">
+                  </path>
+                </svg> Create new account
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="card card-border-body gap-4">
+          <p class="text-xs opacity-60">Registration is free and only takes a minute</p>
+          <div class="flex flex-col gap-1">
+            <label class="input input-border flex max-w-none items-center gap-2">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 16 16"
+                fill="currentColor"
+                class="h-4 w-4 opacity-70">
+                <path
+                  d="M8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6ZM12.735 14c.618 0 1.093-.561.872-1.139a6.002 6.002 0 0 0-11.215 0c-.22.578.254 1.139.872 1.139h9.47Z">
+                </path>
+              </svg>
+              <input type="text" class="grow" placeholder="Username" />
+            </label>
+          </div>
+          <div class="flex flex-col gap-1">
+            <label class="input input-border flex max-w-none items-center gap-2">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 16 16"
+                fill="currentColor"
+                class="h-4 w-4 opacity-70">
+                <path
+                  fill-rule="evenodd"
+                  d="M14 6a4 4 0 0 1-4.899 3.899l-1.955 1.955a.5.5 0 0 1-.353.146H5v1.5a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1-.5-.5v-2.293a.5.5 0 0 1 .146-.353l3.955-3.955A4 4 0 1 1 14 6Zm-4-2a.75.75 0 0 0 0 1.5.5.5 0 0 1 .5.5.75.75 0 0 0 1.5 0 2 2 0 0 0-2-2Z"
+                  clip-rule="evenodd">
+                </path>
+              </svg>
+              <input type="password" class="grow" placeholder="password" />
+            </label>
+            <span class="text-base-content/60 flex items-center gap-2 px-1 text-[0.6875rem]">
+              <span class="status status-error inline-block"></span> Password must be 8+ characters
+            </span>
+          </div>
+          <label class="text-base-content/60 flex items-center gap-2 text-xs">
+            <input type="checkbox" class="toggle toggle-xs" /> Accept terms without reading
+          </label>
+          <label class="text-base-content/60 flex items-center gap-2 text-xs">
+            <input type="checkbox" class="toggle toggle-xs" /> Subscribe to spam emails
+          </label>
+          <div class="card card-border-actions items-center gap-6">
+            <button class="btn btn-primary py-1">Register</button>
+            <button class="link">Or login</button>
           </div>
         </div>
       </div>

@@ -78,12 +78,13 @@ let css = `
     --color-warning-content: ${formatCss(oklch(theme.warningContent))};
     --color-error: ${formatCss(oklch(theme.error))};
     --color-error-content: ${formatCss(oklch(theme.errorContent))};
-    --radius-selector: ${theme.selectorsRadius};
-    --radius-field: ${theme.fieldsRadius};
-    --radius-box: ${theme.boxesRadius};
+    --radius-selector: ${theme.selectorsRadius}rem;
+    --radius-field: ${theme.fieldsRadius}rem;
+    --radius-box: ${theme.boxesRadius}rem;
+    --radius-box-inside: ${theme.boxesRadius * 0.8}rem;
     --size-selector: ${theme.selectorsSize};
     --size-field: ${theme.fieldsSize};
-    --border: ${theme.bordersSize};
+    --border: ${theme.bordersSize}px;
     --depth: ${theme.depth ? '1' : '0'};
     --noise: ${theme.noise ? '1' : '0'};
   }
