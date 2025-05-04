@@ -39,6 +39,7 @@ export default async function generateStaticPaths() {
         });
       });
     });
+
   // @ts-ignore
   return paths;
 }

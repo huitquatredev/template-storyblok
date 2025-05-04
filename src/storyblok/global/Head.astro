@@ -100,7 +100,7 @@ const {
 
   <meta name="generator" content={Astro.generator} />
 
-  {canonical && <link rel="canonical" href={canonical} />}
+  {canonical && <link rel="canonical" href={Astro.url.href + canonical} />}
   {!canonical && <link rel="canonical" href={Astro.url.href} />}
 
   <meta name="description" content={description} />

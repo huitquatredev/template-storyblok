@@ -26,6 +26,7 @@ const { blok } = Astro.props
             <div>
               <label for="prenom" class="block mb-2 text-sm text-base-content/85 font-medium">Prénom</label>
               <input
+                required
                 type="text"
                 name="prenom"
                 id="prenom"
@@ -36,6 +37,7 @@ const { blok } = Astro.props
             <div>
               <label for="nom" class="block mb-2 text-sm text-base-content/85 font-medium">Nom</label>
               <input
+                required
                 type="text"
                 name="nom"
                 id="nom"
@@ -48,6 +50,7 @@ const { blok } = Astro.props
             <div>
               <label for="email" class="block mb-2 text-sm text-base-content/85 font-medium">Email</label>
               <input
+                required
                 type="email"
                 name="email"
                 id="email"
@@ -72,11 +75,21 @@ const { blok } = Astro.props
           <div>
             <label for="message" class="block mb-2 text-sm text-base-content/85 font-medium">Message</label>
             <textarea
+              required
               id="message"
               name="message"
               rows="4"
               class="text-base-300 py-2.5 sm:py-3 px-4 block w-full card card-border rounded-[var(--radius-field)] sm:text-sm focus:border-accent focus:ring-accent disabled:opacity-50 disabled:pointer-events-none">
             </textarea>
+
+            <fieldset class="fieldset rounded-box">
+              <label class="fieldset-label">
+                <input type="checkbox" class="checkbox checkbox-accent" required />
+                <span class="p-4 body-sm text-base-content">
+                  {blok.rgpd}
+                </span>
+              </label>
+            </fieldset>
           </div>
         </div>
 
