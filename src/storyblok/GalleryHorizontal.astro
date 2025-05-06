@@ -1,6 +1,7 @@
 ---
 import { storyblokEditable } from '@storyblok/astro'
 import NetlifyImage from './utils/NetlifyImage.astro'
+import RichText from './utils/RichText.astro'
 const { blok } = Astro.props
 ---
 
@@ -16,6 +17,9 @@ const { blok } = Astro.props
       }
     </ul>
     <div aria-hidden="true" class="drag-gallery__gesture-hint"></div>
+  </div>
+  <div class="leading-relaxed">
+    <RichText content={blok.content} />
   </div>
 </section>
 
