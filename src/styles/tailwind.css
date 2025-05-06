@@ -9,7 +9,7 @@
 @plugin "daisyui";
 
 @utility btn {
-  @apply mx-1 leading-none my-2;
+  @apply mx-1 leading-none mt-2;
 }
 
 @utility hero-content {
