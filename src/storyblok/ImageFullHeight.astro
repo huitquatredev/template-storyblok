@@ -1,0 +1,9 @@
+---
+import NetlifyImage from './utils/NetlifyImage.astro'
+
+const { blok } = Astro.props
+---
+
+<section class="container">
+  <NetlifyImage src={blok.image.filename} alt={blok.image.alt} class="rounded-[var(--radius-box)] h-full w-auto" />
+</section>

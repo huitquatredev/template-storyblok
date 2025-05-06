@@ -5,21 +5,26 @@ const { blok } = Astro.props
 
 let bgImgUrl = new URL('.netlify/images', Astro.site)
 bgImgUrl.searchParams.set('url', blok?.image.filename)
+
+console.log(blok.content)
 ---
 
 <section class="container" {...storyblokEditable(blok)} data-aos="fade-up">
   <div
     class="min-h-[35vh] md:min-h-[75vh] bg-center bg-cover bg-no-repeat relative rounded-[var(--radius-box)] bg-wrapper"
     style={`--bg-image: url(${bgImgUrl})`}>
-    <div
-      class="absolute bottom-0 start-0 end-0 max-w-xs md:max-w-sm text-center mx-auto p-6 md:start-auto md:text-start md:mx-0">
-      <div
-        data-aos-delay="300"
-        data-aos="fade-down"
-        class={`px-5 py-4 inline-block ${blok.cardColor === 'primary' ? 'bg-primary text-primary-content' : blok.cardColor === 'secondary' ? 'bg-secondary text-secondary-content' : blok.cardColor === 'accent' ? 'bg-accent text-accent-content' : 'bg-neutral text-neutral-content'} rounded-[var(--radius-box)] md:p-7`}>
-        <RichText content={blok.content} />
-      </div>
-    </div>
+    {
+      blok.content && (
+        <div class="absolute bottom-0 start-0 end-0 max-w-xs md:max-w-sm text-center mx-auto p-6 md:start-auto md:text-start md:mx-0">
+          <div
+            data-aos-delay="300"
+            data-aos="fade-down"
+            class={`px-5 py-4 inline-block ${blok.cardColor === 'primary' ? 'bg-primary text-primary-content' : blok.cardColor === 'secondary' ? 'bg-secondary text-secondary-content' : blok.cardColor === 'accent' ? 'bg-accent text-accent-content' : 'bg-neutral text-neutral-content'} rounded-[var(--radius-box)] md:p-7`}>
+            <RichText content={blok.content} />
+          </div>
+        </div>
+      )
+    }
   </div>
 </section>
 

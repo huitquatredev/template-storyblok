@@ -60,6 +60,7 @@ export default defineConfig({
         team: "storyblok/Team",
         horizontalGallery: "storyblok/GalleryHorizontal",
         masonryGallery: "storyblok/GalleryMasonry",
+        image: "storyblok/ImageFullHeight",
       },
     }),
     sitemap({
