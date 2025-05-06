@@ -18,9 +18,13 @@ const { blok } = Astro.props
     </ul>
     <div aria-hidden="true" class="drag-gallery__gesture-hint"></div>
   </div>
-  <div class="leading-relaxed">
-    <RichText content={blok.content} />
-  </div>
+  {
+    blok.content && (
+      <div class={`leading-relaxed flex justify-center mt-8 ${blok.content.content.length < 3 ? 'text-center' : ''}`}>
+        <RichText content={blok.content} />
+      </div>
+    )
+  }
 </section>
 
 <style>

@@ -20,7 +20,7 @@ const { blok } = Astro.props
 
   <div class="grid grid-cols-1 lg:grid-cols-2 lg:items-center gap-6 md:gap-8 lg:gap-12">
     <div class="overflow-hidden rounded-[var(--radius-box)]">
-      <NetlifyImage class="object-cover max-h-80" src={blok.image.filename} alt={blok.image.alt} />
+      <NetlifyImage class="object-cover" src={blok.image.filename} alt={blok.image.alt} />
     </div>
 
     <div class="space-y-8 lg:space-y-16">
@@ -29,15 +29,17 @@ const { blok } = Astro.props
           blok.infos.map((info) => (
             <div>
               <Heading tag={info.tag} classlist="mb-5 font-semibold" content={info.title} />
-              <div class="grid sm:grid-cols-2 gap-4 sm:gap-6 md:gap-8 lg:gap-12">
+              <div class="grid  gap-4 sm:gap-6 md:gap-8 lg:gap-12">
                 {info.items.map((item) => (
                   <div class="flex gap-4">
-                    <div class="shrink-0 size-5">
-                      {item.image.filename.endsWith('.svg') && <InlineSvg src={item.image.filename} />}
-                      {!item.image.filename.endsWith('.svg') && (
-                        <NetlifyImage src={item.image.filename} alt={item.image.alt} />
-                      )}
-                    </div>
+                    {item.image && (
+                      <div class="shrink-0 size-5">
+                        {item.image.filename.endsWith('.svg') && <InlineSvg src={item.image.filename} />}
+                        {!item.image.filename.endsWith('.svg') && (
+                          <NetlifyImage src={item.image.filename} alt={item.image.alt} />
+                        )}
+                      </div>
+                    )}
                     <div class="grow">
                       <RichText content={item.content} />
                     </div>

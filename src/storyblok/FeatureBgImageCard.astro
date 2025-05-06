@@ -19,7 +19,7 @@ console.log(blok.content)
           <div
             data-aos-delay="300"
             data-aos="fade-down"
-            class={`px-5 py-4 inline-block ${blok.cardColor === 'primary' ? 'bg-primary text-primary-content' : blok.cardColor === 'secondary' ? 'bg-secondary text-secondary-content' : blok.cardColor === 'accent' ? 'bg-accent text-accent-content' : 'bg-neutral text-neutral-content'} rounded-[var(--radius-box)] md:p-7`}>
+            class={`${blok.content.content.length < 3 ? 'text-center' : ''} px-5 py-4 inline-block ${blok.cardColor === 'primary' ? 'bg-primary text-primary-content' : blok.cardColor === 'secondary' ? 'bg-secondary text-secondary-content' : blok.cardColor === 'accent' ? 'bg-accent text-accent-content' : 'bg-transparent'} rounded-[var(--radius-box)] md:p-7`}>
             <RichText content={blok.content} />
           </div>
         </div>
