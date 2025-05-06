@@ -8,11 +8,7 @@
 [dev]
   targetPort = 4321
 
-[[headers]]
-  for = "/*"
-  [headers.values]
-    X-Content-Type-Options = "nosniff"
-    X-Frame-Options = "DENY"
+
   
   
 

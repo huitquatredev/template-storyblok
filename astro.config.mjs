@@ -72,10 +72,6 @@ export default defineConfig({
       filter: (page) => !filteredUrls.includes(page),
     }),
     shield({
-      sri: {
-        allowInlineScripts: "all",
-        allowInlineStyles: "all",
-      },
       // - If set, it controls how the security headers will be generated.
       // - If not set, no security headers will be generated.
       securityHeaders: {
