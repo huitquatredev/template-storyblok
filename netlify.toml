@@ -7,6 +7,12 @@
   remote_images = ["https://a.storyblok.com/f/335088/.*"]
 [dev]
   targetPort = 4321
+
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Content-Type-Options = "nosniff"
+    X-Frame-Options = "DENY"
   
   
 

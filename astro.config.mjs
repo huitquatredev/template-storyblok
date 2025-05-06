@@ -83,6 +83,7 @@ export default defineConfig({
         //   will be generated.
         // - If not set, no CSP header will be configured for your static
         //   content (there is no need to specify its inner options).
+        // TODO : change to accomodate the need of the project
         contentSecurityPolicy: {
           // - If set, it controls the "default" CSP directives (they can be
           //   overriden at runtime).

@@ -5,8 +5,6 @@ const { blok } = Astro.props
 
 let bgImgUrl = new URL('.netlify/images', Astro.site)
 bgImgUrl.searchParams.set('url', blok?.image.filename)
-
-console.log(blok.content)
 ---
 
 <section class="container" {...storyblokEditable(blok)} data-aos="fade-up">
