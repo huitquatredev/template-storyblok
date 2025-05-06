@@ -8,6 +8,8 @@ import sitemap from "@astrojs/sitemap";
 import StoryblokClient from "storyblok-js-client";
 import { resolve } from "node:path";
 
+import favicons from "astro-favicons";
+
 const rootDir = new URL(".", import.meta.url).pathname;
 const modulePath = resolve(rootDir, "src", "generated", "sriHashes.mjs");
 
@@ -39,38 +41,35 @@ storyblokStories.data.stories.map((story) => {
 export default defineConfig({
   output: env.STORYBLOK_IS_PREVIEW === "yes" ? "server" : "static",
   adapter: netlify(),
-  integrations: [
-    storyblok({
-      accessToken: env.STORYBLOK_TOKEN,
-      bridge: env.STORYBLOK_IS_PREVIEW === "yes",
-      components: {
-        page: "storyblok/Page",
-        theme: "storyblok/global/Theme",
-        hero: "storyblok/Hero",
-        featureSimple: "storyblok/FeatureSimple",
-        featureGalleryIcons: "storyblok/FeatureGalleryIcons",
-        featureBgImageCard: "storyblok/FeatureBgImageCard",
-        faq: "storyblok/Faq",
-        timeline: "storyblok/Timeline",
-        testimonialStats: "storyblok/TestimonialStats",
-        logoGallery: "storyblok/LogoGallery",
-        contactForm: "storyblok/ContactForm",
-        contactInfo: "storyblok/ContactInfo",
-        blocText: "storyblok/BlocText",
-        stepsRows: "storyblok/StepsRows",
-        stepsCols: "storyblok/StepsCols",
-        testimonialSimple: "storyblok/TestimonialSimple",
-        testimonialsMultiple: "storyblok/TestimonialsMultiple",
-        team: "storyblok/Team",
-        horizontalGallery: "storyblok/GalleryHorizontal",
-        masonryGallery: "storyblok/GalleryMasonry",
-        image: "storyblok/ImageFullHeight",
-      },
-    }),
-    sitemap({
-      filter: (page) => !filteredUrls.includes(page),
-    }),
-  ],
+  integrations: [storyblok({
+    accessToken: env.STORYBLOK_TOKEN,
+    bridge: env.STORYBLOK_IS_PREVIEW === "yes",
+    components: {
+      page: "storyblok/Page",
+      theme: "storyblok/global/Theme",
+      hero: "storyblok/Hero",
+      featureSimple: "storyblok/FeatureSimple",
+      featureGalleryIcons: "storyblok/FeatureGalleryIcons",
+      featureBgImageCard: "storyblok/FeatureBgImageCard",
+      faq: "storyblok/Faq",
+      timeline: "storyblok/Timeline",
+      testimonialStats: "storyblok/TestimonialStats",
+      logoGallery: "storyblok/LogoGallery",
+      contactForm: "storyblok/ContactForm",
+      contactInfo: "storyblok/ContactInfo",
+      blocText: "storyblok/BlocText",
+      stepsRows: "storyblok/StepsRows",
+      stepsCols: "storyblok/StepsCols",
+      testimonialSimple: "storyblok/TestimonialSimple",
+      testimonialsMultiple: "storyblok/TestimonialsMultiple",
+      team: "storyblok/Team",
+      horizontalGallery: "storyblok/GalleryHorizontal",
+      masonryGallery: "storyblok/GalleryMasonry",
+      image: "storyblok/ImageFullHeight",
+    },
+  }), sitemap({
+    filter: (page) => !filteredUrls.includes(page),
+  }), favicons()],
   site: siteurl,
   vite: {
     plugins: [tailwindcss()],

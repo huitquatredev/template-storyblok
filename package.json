@@ -17,6 +17,7 @@
     "@tailwindcss/vite": "^4.1.4",
     "aos": "^2.3.4",
     "astro": "^5.7.3",
+    "astro-favicons": "^3.1.5",
     "clone-deep": "^4.0.1",
     "culori": "^4.0.1",
     "lenis": "^1.2.3",
