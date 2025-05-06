@@ -71,30 +71,6 @@ export default defineConfig({
     sitemap({
       filter: (page) => !filteredUrls.includes(page),
     }),
-    shield({
-      // - If set, it controls how the security headers will be generated.
-      // - If not set, no security headers will be generated.
-      securityHeaders: {
-        // This option is required to configure CSP headers for your static
-        // content on Netlify.
-        enableOnStaticPages: { provider: "netlify" },
-
-        // - If set, it controls how the CSP (Content Security Policy) header
-        //   will be generated.
-        // - If not set, no CSP header will be configured for your static
-        //   content (there is no need to specify its inner options).
-        // TODO : change to accomodate the need of the project
-        contentSecurityPolicy: {
-          // - If set, it controls the "default" CSP directives (they can be
-          //   overriden at runtime).
-          // - If not set, Astro-Shield will use a minimal set of default
-          //   directives.
-          cspDirectives: {
-            "default-src": "'self'",
-          },
-        },
-      },
-    }),
   ],
   site: siteurl,
   vite: {
