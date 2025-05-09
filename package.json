@@ -4,11 +4,12 @@
   "version": "0.0.1",
   "scripts": {
     "dev": "npm run fetch-fonts && npm run fetch-favicons && astro dev",
-    "build": "npm run fetch-fonts && npm run fetch-favicons && astro build",
+    "build": "npm run fetch-fonts && npm run fetch-favicons && astro build && npm run fetch-redirects",
     "preview": "astro preview",
     "astro": "astro",
     "fetch-fonts": "node --experimental-modules fonts.mjs",
-    "fetch-favicons": "node --experimental-modules favicons.mjs"
+    "fetch-favicons": "node --experimental-modules favicons.mjs",
+    "fetch-redirects": "node --experimental-modules redirects.mjs"
   },
   "dependencies": {
     "@astro-community/astro-embed-youtube": "^0.5.6",
