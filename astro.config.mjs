@@ -45,6 +45,7 @@ export default defineConfig({
       bridge: env.STORYBLOK_IS_PREVIEW === "yes",
       components: {
         page: "storyblok/Page",
+        blog: "storyblok/Blog",
         theme: "storyblok/global/Theme",
         hero: "storyblok/Hero",
         featureSimple: "storyblok/FeatureSimple",
@@ -65,6 +66,7 @@ export default defineConfig({
         horizontalGallery: "storyblok/GalleryHorizontal",
         masonryGallery: "storyblok/GalleryMasonry",
         image: "storyblok/ImageFullHeight",
+        blogGallery: "storyblok/BlogGallery",
       },
     }),
     sitemap({

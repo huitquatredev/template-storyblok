@@ -1,0 +1,67 @@
+---
+import { storyblokEditable } from '@storyblok/astro'
+import RichText from './utils/RichText.astro'
+import { useStoryblokApi } from '@storyblok/astro'
+import isPreview from '../utils/isPreview'
+import NetlifyImage from './utils/NetlifyImage.astro'
+
+const { blok } = Astro.props
+
+const storyblokApi = useStoryblokApi()
+const { data } = await storyblokApi.get('cdn/stories/', {
+  version: isPreview() ? 'draft' : 'published',
+  starts_with: 'blog/',
+  is_startpage: false
+})
+
+console.log(data.stories)
+---
+
+<section class="relative z-[1] container" {...storyblokEditable(blok)} data-aos="fade-up">
+  <div class="grid grid-cols-1 lg:grid-cols-3 gap-12">
+    <div class="max-w-xl lg:text-balance">
+      <RichText content={blok.title} />
+    </div>
+    <div class="relative flex flex-col gap-12 lg:col-span-2">
+      {
+        data.stories?.map((article) => (
+          <article class="relative flex flex-col isolate gap-8 lg:flex-row group">
+            <div class="relative aspect-[16/9] sm:aspect-[2/1] lg:aspect-square lg:w-64 lg:shrink-0">
+              {article.content.image && (
+                <NetlifyImage
+                  src={article.content.image.filename}
+                  alt={article.content.image.alt}
+                  class="absolute inset-0 object-cover size-full rounded-2xl"
+                />
+              )}
+            </div>
+            <div class="flex flex-col justify-between">
+              <div>
+                <a class="mt-4" href={'/' + article.full_slug}>
+                  <div class="text-lg lg:text-2xl font-bold group-hover:text-accent duration-200">
+                    <span class="absolute inset-0" />
+                    {article.content.titreArticle}
+                  </div>
+                </a>
+                <div class="mt-4 text-base font-light line-clamp-3">
+                  <RichText content={article.content.abstract} />
+                </div>
+              </div>
+              <div class="relative flex items-center mt-4 gap-x-4">
+                <div>
+                  <h3 class="text-base font-medium text-base-900">John Doe</h3>
+                  <div>
+                    <span class="sr-only">Mon Mar 25</span>
+                    <p class="text-sm font-medium uppercase text-base-500">
+                      <time datetime="Mon Mar 25">Mon Mar 25</time>
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </article>
+        ))
+      }
+    </div>
+  </div>
+</section>
