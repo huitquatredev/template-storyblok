@@ -3,11 +3,12 @@
   "type": "module",
   "version": "0.0.1",
   "scripts": {
-    "dev": "npm run fetch-fonts && astro dev",
-    "build": "npm run fetch-fonts && astro build",
+    "dev": "npm run fetch-fonts && npm run fetch-favicons && astro dev",
+    "build": "npm run fetch-fonts && npm run fetch-favicons && astro build",
     "preview": "astro preview",
     "astro": "astro",
-    "fetch-fonts": "node --experimental-modules fonts.mjs"
+    "fetch-fonts": "node --experimental-modules fonts.mjs",
+    "fetch-favicons": "node --experimental-modules favicons.mjs"
   },
   "dependencies": {
     "@astro-community/astro-embed-youtube": "^0.5.6",
@@ -17,7 +18,6 @@
     "@tailwindcss/vite": "^4.1.4",
     "aos": "^2.3.4",
     "astro": "^5.7.3",
-    "astro-favicons": "^3.1.5",
     "clone-deep": "^4.0.1",
     "culori": "^4.0.1",
     "lenis": "^1.2.3",

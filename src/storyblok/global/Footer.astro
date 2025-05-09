@@ -5,7 +5,7 @@ import SWAGscore from './SWAGscore.astro'
 const { logo, name, slogan, menu } = Astro.props
 ---
 
-<footer class="footer sm:footer-horizontal bg-base-200 text-base-content p-10 items-center justify-around">
+<footer class="footer sm:footer-horizontal bg-base-200 text-base-content p-10 items-baseline justify-around">
   <aside>
     {logo.filename.endsWith('.svg') && <InlineSvg src={logo.filename} class="h-auto w-32" />}
     {!logo.filename.endsWith('.svg') && <NetlifyImage src={logo.filename} alt={logo.alt} class="h-auto w-32" />}
@@ -16,16 +16,26 @@ const { logo, name, slogan, menu } = Astro.props
     </p>
   </aside>
   {
-    menu.map((cat) => (
-      <nav>
-        <h6 class="footer-title">{cat.name}</h6>
-        {cat.pages.map((item) => (
-          <a class="link link-hover" href={item.slug}>
-            {item.name}
+    menu.map((cat) => {
+      if (cat.pages.length === 1) {
+        return (
+          <a class="link link-hover footer-title" href={cat.pages[0].slug}>
+            {cat.pages[0].name}
           </a>
-        ))}
-      </nav>
-    ))
+        )
+      } else {
+        return (
+          <nav>
+            <h6 class="footer-title">{cat.name}</h6>
+            {cat.pages.map((item) => (
+              <a class="link link-hover" href={item.slug}>
+                {item.name}
+              </a>
+            ))}
+          </nav>
+        )
+      }
+    })
   }
 
   <div>
