@@ -14,18 +14,32 @@ const { data } = await storyblokApi.get('cdn/stories/', {
   is_startpage: false
 })
 
-console.log(data.stories)
+data.stories.sort(function (a, b) {
+  // Turn your strings into dates, and then subtract them
+  // to get a value that is either negative, positive, or zero.
+  return new Date(b.content.creationDate || b.created_at) - new Date(a.content.creationDate || a.created_at)
+})
+
+let itemPerPage = blok.itemPerPage || 3
+
+if (data.stories.length > itemPerPage) {
+  data.hasPagination = true
+} else {
+  data.hasPagination = false
+}
 ---
 
-<section class="relative z-[1] container" {...storyblokEditable(blok)} data-aos="fade-up">
+<section class="relative z-[1] container" {...storyblokEditable(blok)} data-aos="fade-up" data-pagination={itemPerPage}>
   <div class="grid grid-cols-1 lg:grid-cols-3 gap-12">
     <div class="max-w-xl lg:text-balance">
       <RichText content={blok.title} />
     </div>
     <div class="relative flex flex-col gap-12 lg:col-span-2">
       {
-        data.stories?.map((article) => (
-          <article class="relative flex flex-col isolate gap-8 lg:flex-row group">
+        data.stories.map((article, idx) => (
+          <article
+            data-idx={idx}
+            class={`relative flex flex-col isolate gap-8 lg:flex-row group ${idx > itemPerPage - 1 ? 'hidden' : ''}`}>
             <div class="relative aspect-[16/9] sm:aspect-[2/1] lg:aspect-square lg:w-64 lg:shrink-0">
               {article.content.image && (
                 <NetlifyImage
@@ -69,4 +83,96 @@ console.log(data.stories)
       }
     </div>
   </div>
+  {
+    data.hasPagination && (
+      <section>
+        <div class="flex justify-center w-full px-8 mx-auto md:px-12 lg:px-24 max-w-7xl">
+          <nav class="flex items-center justify-center w-full px-4 sm:px-0 gap-4">
+            <button id="blogPrev" class={`btn btn-primary`}>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                class="icon icon-tabler-chevron-left size-4"
+                slot="left-icon">
+                <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                <path d="M15 6l-6 6l6 6" />
+              </svg>
+              Précédent
+            </button>
+
+            <button id="blogNext" class={`btn btn-primary `}>
+              Suivant
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                class="icon icon-tabler-chevron-right size-4"
+                slot="right-icon">
+                <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                <path d="M9 6l6 6l-6 6" />
+              </svg>
+            </button>
+          </nav>
+        </div>
+      </section>
+    )
+  }
 </section>
+
+<script>
+  const blogPrev = document.getElementById('blogPrev')
+  const blogNext = document.getElementById('blogNext')
+  const articles = document.querySelectorAll('article[data-idx]')
+  const itemPerPage = document.querySelector('section[data-pagination]').getAttribute('data-pagination')
+  let currentPage = 0
+
+  function showArticles() {
+    articles.forEach((article, idx) => {
+      if (idx >= currentPage * itemPerPage && idx < (currentPage + 1) * itemPerPage) {
+        article.classList.remove('hidden')
+      } else {
+        article.classList.add('hidden')
+      }
+    })
+  }
+
+  function updateButtons() {
+    if (currentPage === 0) {
+      blogPrev.classList.add('btn-disabled')
+    } else {
+      blogPrev.classList.remove('btn-disabled')
+    }
+    if ((currentPage + 1) * itemPerPage >= articles.length) {
+      blogNext.classList.add('btn-disabled')
+    } else {
+      blogNext.classList.remove('btn-disabled')
+    }
+  }
+
+  blogPrev.addEventListener('click', () => {
+    console.log(currentPage)
+    if (currentPage > 0) {
+      currentPage--
+      showArticles()
+      updateButtons()
+    }
+  })
+  blogNext.addEventListener('click', () => {
+    console.log(currentPage)
+
+    if ((currentPage + 1) * itemPerPage < articles.length) {
+      currentPage++
+      showArticles()
+      updateButtons()
+    }
+  })
+</script>
