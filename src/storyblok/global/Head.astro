@@ -91,7 +91,7 @@ const {
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
 
-  <title>{title}</title>
+  {title && <title>{title}</title>}
 
   {themeColor && <meta name="theme-color" content={themeColor} />}
   {themeDarkColor && <meta name="theme-color" media="(prefers-color-scheme: dark)" content={themeDarkColor} />}
@@ -102,7 +102,7 @@ const {
   {canonical && <link rel="canonical" href={Astro.url.href + canonical} />}
   {!canonical && <link rel="canonical" href={Astro.url.href} />}
 
-  <meta name="description" content={description} />
+  {description && <meta name="description" content={description} />}
 
   {robots && <meta name="robots" content={robots} />}
   {!robots && <meta name="robots" content="all" />}
@@ -114,12 +114,12 @@ const {
   <meta name="apple-mobile-web-app-title" content="L'essentiel" />
   <link rel="manifest" href="/favicons/site.webmanifest" />
 
-  <meta property="og:title" content={title} />
+  {title && <meta property="og:title" content={title} />}
   <meta property="og:type" content="website" />
   {ogImage && <meta property="og:image" content={ogImage} />}
   <meta property="og:url" content={Astro.url.href} />
 
-  <meta property="og:description" content={description} />
+  {description && <meta property="og:description" content={description} />}
   <meta property="og:locale" content="fr_FR" />
   <meta property="og:site_name" content="huitquatre" />
   {ogImageAlt && <meta property="og:image:alt" content={ogImageAlt} />}
@@ -131,7 +131,7 @@ const {
   <meta name="geo.region" content="FR" />
   <meta name="geo.placename" content="Piolenc" />
 
-  <style set:html={css}></style>
+  {css && <style set:html={css} />}
 
   {schema && <script type="application/ld+json" set:html={schema} />}
 

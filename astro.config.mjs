@@ -6,10 +6,9 @@ import netlify from "@astrojs/netlify";
 import tailwindcss from "@tailwindcss/vite";
 import sitemap from "@astrojs/sitemap";
 import StoryblokClient from "storyblok-js-client";
-import { resolve } from "node:path";
 
-const rootDir = new URL(".", import.meta.url).pathname;
-const modulePath = resolve(rootDir, "src", "generated", "sriHashes.mjs");
+// const rootDir = new URL(".", import.meta.url).pathname;
+// const modulePath = resolve(rootDir, "src", "generated", "sriHashes.mjs");
 
 const env = loadEnv("", process.cwd(), "STORYBLOK");
 //TODO : change site url
