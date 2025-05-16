@@ -13,7 +13,7 @@ import devtoolsJson from "vite-plugin-devtools-json";
 
 const env = loadEnv("", process.cwd(), "STORYBLOK");
 //TODO : change site url
-const siteurl = "https://jcchevalier-production.netlify.app";
+const siteurl = "https://laparentelle-production.netlify.app";
 
 // 1. Initialize the Client with the token
 const Storyblok = new StoryblokClient({
