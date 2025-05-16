@@ -9,7 +9,9 @@
     "astro": "astro",
     "fetch-fonts": "node --experimental-modules fonts.mjs",
     "fetch-favicons": "node --experimental-modules favicons.mjs",
-    "fetch-redirects": "node --experimental-modules redirects.mjs"
+    "fetch-redirects": "node --experimental-modules redirects.mjs",
+    "create-storyblok-structure": "node --experimental-modules ./create-storyblok-structure/create-structure.mjs",
+    "get-storyblok-structure": "node --experimental-modules ./create-storyblok-structure/get-initial-struct.mjs"
   },
   "dependencies": {
     "@astro-community/astro-embed-youtube": "^0.5.6",
@@ -21,6 +23,7 @@
     "astro": "^5.7.12",
     "clone-deep": "^4.0.1",
     "culori": "^4.0.1",
+    "dotenv": "^16.5.0",
     "lenis": "^1.2.3",
     "preline": "^3.0.1",
     "probe-image-size": "^7.2.3",
@@ -32,6 +35,7 @@
     "@tailwindcss/typography": "^0.5.16",
     "daisyui": "^5.0.25",
     "prettier": "^3.5.3",
-    "prettier-plugin-astro": "^0.14.1"
+    "prettier-plugin-astro": "^0.14.1",
+    "vite-plugin-devtools-json": "^0.1.0"
   }
 }

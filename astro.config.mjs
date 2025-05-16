@@ -6,6 +6,7 @@ import netlify from "@astrojs/netlify";
 import tailwindcss from "@tailwindcss/vite";
 import sitemap from "@astrojs/sitemap";
 import StoryblokClient from "storyblok-js-client";
+import devtoolsJson from "vite-plugin-devtools-json";
 
 // const rootDir = new URL(".", import.meta.url).pathname;
 // const modulePath = resolve(rootDir, "src", "generated", "sriHashes.mjs");
@@ -74,6 +75,6 @@ export default defineConfig({
   ],
   site: siteurl,
   vite: {
-    plugins: [tailwindcss()],
+    plugins: [devtoolsJson(), tailwindcss()],
   },
 });
