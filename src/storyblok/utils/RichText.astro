@@ -12,7 +12,7 @@ let renderedRichText = renderRichText(content, {
     // console.log(blok)
     switch (component) {
       case 'btn':
-        return `<a class="btn ${blok.style === 'normal' ? '' : blok.style === 'soft' ? 'btn-soft' : blok.style === 'outline' ? 'btn-outline' : ''} ${blok.couleur === 'neutral' ? 'btn-neutral' : blok.couleur === 'primary' ? 'btn-primary' : blok.couleur === 'secondary' ? 'btn-secondary' : blok.couleur === 'accent' ? 'btn-accent' : 'btn-neutral'} ${blok.taille === 'xs' ? 'btn-xs' : blok.taille === 'sm' ? 'btn-sm' : blok.taille === 'md' ? 'btn-md' : blok.taille === 'lg' ? 'btn-md' : blok.taille === 'xl' ? 'btn-xl' : 'btn-md'}"  href="${toUrl(blok.lien?.url) || (blok.lien.story?.url.startsWith('/') ? blok.lien.story?.url : '/' + blok.lien?.story?.url)}">${blok.texte}</a>`
+        return `<a class="btn ${blok.style === 'normal' ? '' : blok.style === 'soft' ? 'btn-soft' : blok.style === 'outline' ? 'btn-outline' : ''} ${blok.couleur === 'neutral' ? 'btn-neutral' : blok.couleur === 'primary' ? 'btn-primary' : blok.couleur === 'secondary' ? 'btn-secondary' : blok.couleur === 'accent' ? 'btn-accent' : 'btn-neutral'} ${blok.taille === 'xs' ? 'btn-xs' : blok.taille === 'sm' ? 'btn-sm' : blok.taille === 'md' ? 'btn-md' : blok.taille === 'lg' ? 'btn-md' : blok.taille === 'xl' ? 'btn-xl' : 'btn-md'}"  href="${toUrl(blok.lien?.url) || (blok.lien?.story?.url.startsWith('/') ? blok.lien?.story?.url : '/' + blok.lien?.story?.url)}">${blok.texte}</a>`
       default:
         return `Component ${component} not found`
     }

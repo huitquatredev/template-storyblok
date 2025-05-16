@@ -8,7 +8,7 @@ const { blok } = Astro.props
 let foregroundColor = blok.foregroundColorInvert ? 'text-base-100' : 'text-base-content'
 
 let bgImgUrl = new URL('.netlify/images', Astro.site)
-bgImgUrl.searchParams.set('url', blok?.image.filename)
+bgImgUrl.searchParams.set('url', blok?.image?.filename)
 ---
 
 <section {...storyblokEditable(blok)} class="my-0">
