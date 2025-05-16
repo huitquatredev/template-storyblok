@@ -4,7 +4,7 @@ import RichText from './utils/RichText.astro'
 const { blok } = Astro.props
 
 let bgImgUrl = new URL('.netlify/images', Astro.site)
-bgImgUrl.searchParams.set('url', blok?.image.filename)
+bgImgUrl.searchParams.set('url', blok?.image?.filename)
 ---
 
 <section class="container" {...storyblokEditable(blok)} data-aos="fade-up">

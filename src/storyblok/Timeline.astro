@@ -5,7 +5,7 @@ import NetlifyImage from './utils/NetlifyImage.astro'
 import InlineSvg from './utils/InlineSvg.astro'
 const { blok } = Astro.props
 
-blok.timeline.map((item) => (item.isSvg = item.image.filename.endsWith('.svg')))
+blok.timeline.map((item) => (item.isSvg = item.image?.filename.endsWith('.svg')))
 ---
 
 <section class="container" {...storyblokEditable(blok)}>

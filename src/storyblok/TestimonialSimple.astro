@@ -9,14 +9,14 @@ const { blok } = Astro.props
 <section class="container relative" {...storyblokEditable(blok)} data-aos="fade-up">
   <blockquote class="text-center lg:mx-auto lg:w-3/5">
     {
-      blok.image?.filename.endsWith('.svg') && (
+      blok.image && blok.image?.filename.endsWith('.svg') && (
         <div class="mx-auto w-20 h-auto sm:w-28">
           <InlineSvg src={blok.image.filename} />
         </div>
       )
     }
     {
-      !blok.image?.filename.endsWith('.svg') && (
+      blok.image && !blok.image?.filename.endsWith('.svg') && (
         <NetlifyImage
           src={blok.image.filename}
           alt={blok.image.filename}

@@ -7,9 +7,11 @@ import RichText from './utils/RichText.astro'
 let { blok } = Astro.props
 
 blok.icons?.map((icon) => {
-  icon.image.isSvg = false
-  if (icon.image.filename.endsWith('.svg')) {
-    icon.image.isSvg = true
+  if (icon.image) {
+    icon.image.isSvg = false
+    if (icon.image?.filename.endsWith('.svg')) {
+      icon.image.isSvg = true
+    }
   }
 })
 ---
@@ -30,8 +32,8 @@ blok.icons?.map((icon) => {
           class="text-center flex flex-col justify-center items-center"
           data-aos="fade-down"
           data-aos-duration={500 + idx * 250}>
-          {icon.image.isSvg && <InlineSvg src={icon.image.filename} />}
-          {!icon.image.isSvg && (
+          {icon?.image && icon.image?.isSvg && <InlineSvg src={icon.image.filename} />}
+          {icon?.image && !icon.image.isSvg && (
             <NetlifyImage src={icon.image.filename} alt={icon.image.alt} class="w-12 rounded-[var(--radius-box)]" />
           )}
           <div class="mt-2 sm:mt-6">
