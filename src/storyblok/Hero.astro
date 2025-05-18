@@ -7,8 +7,8 @@ const { blok } = Astro.props
 
 let foregroundColor = blok.foregroundColorInvert ? 'text-base-100' : 'text-base-content'
 
-let bgImgUrl = new URL('.netlify/images', Astro.site)
-bgImgUrl.searchParams.set('url', blok?.image?.filename)
+// let bgImgUrl = new URL('.netlify/images', Astro.site)
+// bgImgUrl.searchParams.set('url', blok?.image?.filename)
 ---
 
 <section {...storyblokEditable(blok)} class="my-0">
@@ -25,7 +25,8 @@ bgImgUrl.searchParams.set('url', blok?.image?.filename)
   }
   {
     blok.layout === 'center' && blok.image && (
-      <div id="hero-bg" class="hero min-h-screen" style={`background-image: url(${bgImgUrl});`}>
+      <div id="hero-bg" class="hero min-h-screen grid">
+        <NetlifyImage src={blok.image.filename} alt={blok.image.alt} class="max-h-screen object-cover" />
         <div class="hero-overlay" />
         <div class="hero-content container text-center">
           <div class={'rich-text ' + foregroundColor} data-aos="zoom-in">
@@ -57,3 +58,10 @@ bgImgUrl.searchParams.set('url', blok?.image?.filename)
     )
   }
 </section>
+
+<style>
+  #hero-bg > * {
+    grid-column: 1 / 1;
+    grid-row: 1 / 1;
+  }
+</style>
