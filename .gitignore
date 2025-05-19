@@ -26,3 +26,6 @@ pnpm-debug.log*
 
 # storyblok struct generator
 create-storyblok-structure/
+
+#TODO
+TODO.md

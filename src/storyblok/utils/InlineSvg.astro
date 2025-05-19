@@ -3,4 +3,11 @@ const { src, class: classList } = Astro.props
 const innerHTML = fetch(src).then((res) => res.text())
 ---
 
-<div class=`fill-current stroke-current ${classList}`><Fragment set:html={innerHTML} /></div>
+<div class=`fill-current stroke-current ${classList ? classList : ''}`><Fragment set:html={innerHTML} /></div>
+
+<style>
+  div > :global(svg) {
+    max-width: 100%;
+    max-height: 100%;
+  }
+</style>
