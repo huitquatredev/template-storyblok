@@ -11,7 +11,8 @@
     "fetch-favicons": "node --experimental-modules favicons.mjs",
     "fetch-redirects": "node --experimental-modules redirects.mjs",
     "create-storyblok-structure": "node --experimental-modules ./create-storyblok-structure/create-structure.mjs",
-    "get-storyblok-structure": "node --experimental-modules ./create-storyblok-structure/get-initial-struct.mjs"
+    "get-storyblok-structure": "node --experimental-modules ./create-storyblok-structure/get-initial-struct.mjs",
+    "get-storyblok-stories": "node --experimental-modules ./create-storyblok-structure/get-stories.mjs"
   },
   "dependencies": {
     "@astro-community/astro-embed-youtube": "^0.5.6",

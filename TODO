@@ -1,0 +1,7 @@
+# in .env update personal, public token and space id
+
+# execute `npm run create-storyblok-structure`
+
+# create Netlify website for preview & production
+
+# change siteurl in astro.config.mjs
