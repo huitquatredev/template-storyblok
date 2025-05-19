@@ -2,6 +2,6 @@
 
 # execute `npm run create-storyblok-structure`
 
-# create Netlify website for preview & production
-
 # change siteurl in astro.config.mjs
+
+# create Netlify website for preview & production
