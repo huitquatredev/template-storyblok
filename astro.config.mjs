@@ -11,9 +11,8 @@ import devtoolsJson from "vite-plugin-devtools-json";
 // const rootDir = new URL(".", import.meta.url).pathname;
 // const modulePath = resolve(rootDir, "src", "generated", "sriHashes.mjs");
 
-const env = loadEnv("", process.cwd(), "STORYBLOK");
-//TODO : change site url
-const siteurl = "https://demo-preview-huitquatre.netlify.app";
+const env = loadEnv("", process.cwd(), "");
+const siteurl = env.SITE_URL;
 
 // 1. Initialize the Client with the token
 const Storyblok = new StoryblokClient({
