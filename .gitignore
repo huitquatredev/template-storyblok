@@ -24,6 +24,9 @@ pnpm-debug.log*
 # jetbrains setting folder
 .idea/
 
+# netlify.toml (generated at build time)
+netlify.toml
+
 # storyblok struct generator
 create-storyblok-structure/
 
