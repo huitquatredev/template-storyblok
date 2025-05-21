@@ -7,7 +7,12 @@ const { blok } = Astro.props
 {
   blok?.image?.filename && (
     <section class="container">
-      <NetlifyImage src={blok.image.filename} alt={blok.image.alt} class="rounded-[var(--radius-box)] h-full w-auto" />
+      <NetlifyImage
+        src={blok.image.filename}
+        alt={blok.image.alt}
+        class="rounded-[var(--radius-box)] h-full w-auto"
+        loading={blok.image.loading === 'eager' ? 'eager' : 'lazy'}
+      />
     </section>
   )
 }

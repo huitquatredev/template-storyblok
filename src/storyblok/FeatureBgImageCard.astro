@@ -1,16 +1,19 @@
 ---
 import { storyblokEditable } from '@storyblok/astro'
 import RichText from './utils/RichText.astro'
-const { blok } = Astro.props
+import NetlifyImage from './utils/NetlifyImage.astro'
 
-let bgImgUrl = new URL('.netlify/images', Astro.site)
-bgImgUrl.searchParams.set('url', blok?.image?.filename)
+const { blok } = Astro.props
 ---
 
 <section class="container" {...storyblokEditable(blok)} data-aos="fade-up">
   <div
-    class="min-h-[35vh] md:min-h-[75vh] bg-center bg-cover bg-no-repeat relative rounded-[var(--radius-box)] bg-wrapper"
-    style={`--bg-image: url(${bgImgUrl})`}>
+    class="min-h-[35vh] md:min-h-[75vh] bg-center bg-cover bg-no-repeat relative rounded-[var(--radius-box)] bg-wrapper grid">
+    <NetlifyImage
+      src={blok.image.filename}
+      alt={blok.image.alt}
+      loading={blok.image.loading === 'eager' ? 'eager' : 'lazy'}
+    />
     {
       blok.content && (
         <div class="absolute bottom-0 start-0 end-0 max-w-xs md:max-w-sm text-center mx-auto p-6 md:start-auto md:text-start md:mx-0">
@@ -27,7 +30,8 @@ bgImgUrl.searchParams.set('url', blok?.image?.filename)
 </section>
 
 <style>
-  .bg-wrapper {
-    background-image: var(--bg-image);
+  .bg-wrapper > * {
+    grid-row: 1/1;
+    grid-column: 1/1;
   }
 </style>

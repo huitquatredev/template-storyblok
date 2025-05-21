@@ -5,6 +5,7 @@ import BaseLayout from '../layout/BaseLayout.astro'
 import parseUrl from '../utils/parseUrl'
 import isPreview from '../utils/isPreview'
 import generateStaticPaths from '../utils/generateStaticPaths'
+import findKey from '../utils/findKey'
 
 export async function getStaticPaths() {
   //We have moved all the code to a generateStaticPaths() function.
@@ -23,7 +24,18 @@ const { data } = await storyblokApi.get(`cdn/stories/${slug === undefined ? 'hom
   resolve_relations: 'page.canonical'
 })
 
-const story = data.story
+let story = data.story
+
+let first_image = true
+
+story.content.body.map((item) => {
+  if (first_image) {
+    if ('image' in item) {
+      first_image = false
+      item.image.loading = 'eager'
+    }
+  }
+})
 ---
 
 <BaseLayout

@@ -21,6 +21,7 @@ const { blok } = Astro.props
                 src={person.image.filename}
                 alt={person.image.alt}
                 class="object-cover mx-auto rounded-[var(--radius-box)] size-full lg:size-20"
+                loading={person.image.loading === 'eager' ? 'eager' : 'lazy'}
               />
             )}
             {(person.nom || person.fonction) && (

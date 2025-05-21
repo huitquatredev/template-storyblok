@@ -23,7 +23,12 @@ let foregroundColor = blok.foregroundColorInvert ? 'text-base-100' : 'text-base-
   {
     blok.layout === 'center' && blok.image && (
       <div id="hero-bg" class="hero min-h-screen grid">
-        <NetlifyImage src={blok.image.filename} alt={blok.image.alt} class="max-h-screen object-cover h-full" />
+        <NetlifyImage
+          src={blok.image.filename}
+          alt={blok.image.alt}
+          class="max-h-screen object-cover h-full"
+          loading={blok.image.loading === 'eager' ? 'eager' : 'lazy'}
+        />
         <div class="hero-overlay" />
         <div class="hero-content container text-center">
           <div class={'rich-text ' + foregroundColor} data-aos="zoom-in">
@@ -44,6 +49,7 @@ let foregroundColor = blok.foregroundColorInvert ? 'text-base-100' : 'text-base-
                 src={blok.image.filename}
                 alt={blok.image.alt}
                 class="max-w-full sm:max-w-sm md:max-w-md rounded-lg shadow-2xl"
+                loading={blok.image.loading === 'eager' ? 'eager' : 'lazy'}
               />
             </div>
           )}

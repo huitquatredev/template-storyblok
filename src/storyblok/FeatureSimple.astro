@@ -10,7 +10,12 @@ const { blok } = Astro.props
     {
       blok.image?.filename && (
         <figure>
-          <NetlifyImage src={blok.image.filename} alt={blok.image.alt} class="rounded-[var(--radius-box)]" />
+          <NetlifyImage
+            src={blok.image.filename}
+            alt={blok.image.alt}
+            class="rounded-[var(--radius-box)]"
+            loading={blok.image.loading === 'eager' ? 'eager' : 'lazy'}
+          />
         </figure>
       )
     }

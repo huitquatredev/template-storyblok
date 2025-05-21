@@ -24,6 +24,7 @@ const { blok } = Astro.props
               <NetlifyImage
                 src={testimonial.image.filename}
                 alt={testimonial.image.filename}
+                loading={testimonial.image.loading === 'eager' ? 'eager' : 'lazy'}
                 class="mx-auto w-20 h-auto sm:w-28 rounded-[var(--radius-box)]"
               />
             )}

@@ -22,7 +22,7 @@ const { data } = await storyblokApi.get('cdn/stories/', {
     </div>
     <div class="relative flex flex-col gap-12 lg:col-span-2">
       {
-        data.stories?.map((article) => (
+        data.stories?.map((article, index) => (
           <article class="relative flex flex-col isolate gap-8 lg:flex-row group">
             <div class="relative aspect-[16/9] sm:aspect-[2/1] lg:aspect-square lg:w-64 lg:shrink-0">
               {article.content.image && (
@@ -30,6 +30,7 @@ const { data } = await storyblokApi.get('cdn/stories/', {
                   src={article.content.image.filename}
                   alt={article.content.image.alt}
                   class="absolute inset-0 object-cover size-full rounded-2xl"
+                  loading={index === 0 ? 'eager' : 'lazy'}
                 />
               )}
             </div>

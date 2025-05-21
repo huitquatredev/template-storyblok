@@ -51,6 +51,7 @@ blok.icons?.map((icon) => {
             src={image.filename}
             alt={image.alt}
             class="size-full object-cover object-center rounded-[var(--radius-box)]"
+            loading={image.loading === 'eager' ? 'eager' : 'lazy'}
           />
         </div>
       ))

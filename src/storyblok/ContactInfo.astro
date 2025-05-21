@@ -22,7 +22,12 @@ const { blok } = Astro.props
     {
       blok.image?.filename && (
         <div class="overflow-hidden rounded-[var(--radius-box)]">
-          <NetlifyImage class="object-cover" src={blok.image.filename} alt={blok.image.alt} />
+          <NetlifyImage
+            class="object-cover"
+            src={blok.image.filename}
+            alt={blok.image.alt}
+            loading={blok.image.loading === 'eager' ? 'eager' : 'lazy'}
+          />
         </div>
       )
     }
