@@ -30,7 +30,7 @@ const { logo, name, slogan, menu } = Astro.props
       } else {
         return (
           <nav>
-            <h6 class="footer-title opacity-100">{cat.name}</h6>
+            <p class="footer-title opacity-100">{cat.name}</p>
             {cat.pages.map((item) => (
               <a class="link link-hover" href={item.slug}>
                 {item.name}
