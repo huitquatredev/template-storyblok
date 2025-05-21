@@ -15,7 +15,7 @@ const { blok } = Astro.props
               src={img.filename}
               alt={img.alt}
               class="rounded-[var(--radius-box)]"
-              loading={blok.image.loading === 'eager' ? 'eager' : 'lazy'}
+              loading={img.loading === 'eager' ? 'eager' : 'lazy'}
             />
           </li>
         ))
