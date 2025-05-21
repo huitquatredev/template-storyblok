@@ -132,12 +132,15 @@ const {
 
   {schema && <script type="application/ld+json" set:html={schema} />}
 
-  <script
-    data-goatcounter=`https://${import.meta.env.GOATCOUNTER}.goatcounter.com/count`
-    `
-    async
-    src="//gc.zgo.at/count.js">
-  </script>
+  {
+    import.meta.env.STORYBLOK_IS_PREVIEW === 'no' && (
+      <script
+        data-goatcounter={`https://${import.meta.env.GOATCOUNTER}.goatcounter.com/count`}
+        async
+        src="//gc.zgo.at/count.js"
+      />
+    )
+  }
 
   <slot />
 </head>
