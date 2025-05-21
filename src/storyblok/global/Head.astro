@@ -55,6 +55,8 @@ let css = `
   }
 `
 
+css = css.replaceAll('none', '0deg')
+
 if (theme.fonts) {
   theme.fonts.map((font) => {
     css += `
