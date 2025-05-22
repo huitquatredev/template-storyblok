@@ -28,14 +28,16 @@ let story = data.story
 
 let first_image = true
 
-story.content.body.map((item) => {
-  if (first_image) {
-    if ('image' in item) {
-      first_image = false
-      item.image.loading = 'eager'
+if (story.content.component != 'theme') {
+  story.content.body.map((item) => {
+    if (first_image) {
+      if ('image' in item) {
+        first_image = false
+        item.image.loading = 'eager'
+      }
     }
-  }
-})
+  })
+}
 ---
 
 <BaseLayout
