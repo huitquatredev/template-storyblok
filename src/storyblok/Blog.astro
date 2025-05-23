@@ -17,14 +17,14 @@ const { blok } = Astro.props
               <NetlifyImage
                 src={blok.image.filename}
                 alt={blok.image.alt}
-                class="shadow rounded-2xl aspect-[4/3] object-cover object-center w-full"
+                class="shadow rounded-[var(--radius-box)] aspect-[4/3] object-cover object-center w-full"
                 loading="eager"
               />
             </div>
           )
         }
 
-        <div class="flex flex-col justify-between h-full p-6 rounded-2xl">
+        <div class="flex flex-col justify-between h-full p-6 rounded-[var(--radius-box)]">
           <div>
             {
               blok.creationDate && (

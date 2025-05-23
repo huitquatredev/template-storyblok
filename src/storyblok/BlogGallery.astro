@@ -13,6 +13,8 @@ const { data } = await storyblokApi.get('cdn/stories/', {
   starts_with: 'blog/',
   is_startpage: false
 })
+
+console.dir(data.stories[2].content, { depth: null })
 ---
 
 <section class="relative z-[1] container" {...storyblokEditable(blok)} data-aos="fade-up">
@@ -29,7 +31,7 @@ const { data } = await storyblokApi.get('cdn/stories/', {
                 <NetlifyImage
                   src={article.content.image.filename}
                   alt={article.content.image.alt}
-                  class="absolute inset-0 object-cover size-full rounded-2xl"
+                  class="absolute inset-0 object-cover size-full rounded-[var(--radius-box)]"
                   loading={index === 0 ? 'eager' : 'lazy'}
                 />
               )}
@@ -50,10 +52,12 @@ const { data } = await storyblokApi.get('cdn/stories/', {
                 <div>
                   <h3 class="text-base font-medium text-base-900">John Doe</h3>
                   <div>
-                    <span class="sr-only">Mon Mar 25</span>
-                    <p class="text-sm font-medium uppercase text-base-500">
-                      <time datetime="Mon Mar 25">Mon Mar 25</time>
-                    </p>
+                    {article.content.creationDate && (
+                      <span class="sr-only">{new Date(article.content.creationDate).toLocaleDateString()}</span>
+                      <p class="text-sm font-bold uppercase text-accent">
+                        <time datetime={article.content.creationDate}>{new Date(article.content.creationDate).toLocaleDateString()}</time>
+                      </p>
+                    )}
                   </div>
                 </div>
               </div>

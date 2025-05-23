@@ -7,12 +7,12 @@ const { blok } = Astro.props
 ---
 
 <section class="container" {...storyblokEditable(blok)} data-aos="fade-up">
-  <div
-    class="min-h-[35vh] md:min-h-[75vh] bg-center bg-cover bg-no-repeat relative rounded-[var(--radius-box)] bg-wrapper grid">
+  <div class="min-h-[35vh] md:min-h-[75vh] bg-center bg-cover bg-no-repeat relative bg-wrapper grid">
     <NetlifyImage
       src={blok.image?.filename}
       alt={blok.image?.alt}
       loading={blok.image?.loading === 'eager' ? 'eager' : 'lazy'}
+      class="rounded-[var(--radius-box)]"
     />
     {
       blok.content && (
