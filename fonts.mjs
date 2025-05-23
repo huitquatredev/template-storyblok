@@ -1,9 +1,10 @@
+import "dotenv/config";
 import fs from "fs/promises";
 import path from "path";
 import StoryblokClient from "storyblok-js-client";
 
 const storyblokApi = new StoryblokClient({
-  accessToken: "nmeqwOQvt86ZpJFS7aoWyAtt",
+  accessToken: process.env.STORYBLOK_TOKEN,
   region: "eu", // Adjust region if needed
 });
 
@@ -14,6 +15,7 @@ async function fetchAndSaveFonts() {
       version: "draft", // Use 'draft' for preview mode
     });
 
+    console.log(data.story.content);
     const fonts = data.story.content.fonts;
 
     if (!fonts || fonts.length === 0) {
@@ -27,7 +29,15 @@ async function fetchAndSaveFonts() {
 
     // Download and save each font file
     for (const font of fonts) {
+      if (font.useLocal) {
+        console.log(`${font.nom} is a local font`);
+        continue;
+      }
       const fontUrl = font.url; // Assuming the font object has a `url` property
+      if (fontUrl === "") {
+        console.log("font configuration but no font url");
+        return;
+      }
       const fontFileName = font.nom + ".woff2";
 
       const response = await fetch(fontUrl);

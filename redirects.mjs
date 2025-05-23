@@ -1,9 +1,10 @@
+import "dotenv/config";
 import fs from "fs/promises";
 import path from "path";
 import StoryblokClient from "storyblok-js-client";
 
 const storyblokApi = new StoryblokClient({
-  accessToken: "nmeqwOQvt86ZpJFS7aoWyAtt",
+  accessToken: process.env.STORYBLOK_TOKEN,
   region: "eu", // Adjust region if needed
 });
 
