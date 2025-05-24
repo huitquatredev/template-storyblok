@@ -30,5 +30,8 @@ netlify.toml
 # storyblok struct generator
 create-storyblok-structure/
 
+public/favicons/
+public/fonts/
+
 #TODO
 TODO.md

@@ -10,10 +10,14 @@ const currentPath = Astro.url.pathname
     class="relative max-w-[85rem] w-full mx-auto md:flex md:items-center md:justify-between md:gap-3 py-2 px-4 sm:px-6 lg:px-8">
     <div class="flex justify-between items-center gap-x-1">
       <a class="flex-none font-semibold text-xl focus:outline-hidden focus:opacity-80" href="/" aria-label={name}>
-        {logo?.filename && logo.filename.endsWith('.svg') && <InlineSvg src={logo.filename} class="h-auto w-32" />}
+        {
+          logo?.filename && logo.filename.endsWith('.svg') && (
+            <InlineSvg src={logo.filename} class="h-auto w-32" innerclass="rounded-[var(--radius-box)]" />
+          )
+        }
         {
           logo?.filename && !logo.filename.endsWith('.svg') && (
-            <NetlifyImage src={logo.filename} alt={name} class="h-auto w-32" />
+            <NetlifyImage src={logo.filename} alt={name} class="h-auto w-32 rounded-[var(--radius-box)]" />
           )
         }
       </a>

@@ -1,6 +1,7 @@
 ---
-const { src, class: classList } = Astro.props
-const innerHTML = fetch(src).then((res) => res.text())
+const { src, class: classList, innerclass } = Astro.props
+let innerHTML = await fetch(src).then((res) => res.text())
+innerHTML = innerHTML.replace('<svg', `<svg class="${innerclass}"`)
 ---
 
 <div class=`fill-current stroke-current ${classList ? classList : ''}`><Fragment set:html={innerHTML} /></div>

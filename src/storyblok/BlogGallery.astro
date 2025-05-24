@@ -14,7 +14,6 @@ const { data } = await storyblokApi.get('cdn/stories/', {
   is_startpage: false
 })
 
-console.dir(data.stories[2].content, { depth: null })
 ---
 
 <section class="relative z-[1] container" {...storyblokEditable(blok)} data-aos="fade-up">
