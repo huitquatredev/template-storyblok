@@ -8,11 +8,6 @@ const storyblokApi = new StoryblokClient({
   region: "eu", // Adjust region if needed
 });
 
-// [[redirects]]
-//   from = "/*"
-//   to = "404.html"
-//   status = 404
-
 async function fetchAndSaveRedirects() {
   try {
     // Fetch theme data from Storyblok

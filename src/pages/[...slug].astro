@@ -17,12 +17,20 @@ let props = isPreview() ? parseUrl(params?.slug) : Astro.props
 const { slug, language, langSwitch } = props
 const storyblokApi = useStoryblokApi()
 
-const { data } = await storyblokApi.get(`cdn/stories/${slug === undefined ? 'home' : slug}`, {
+const { data } = await storyblokApi.get(`cdn/stories/${slug === undefined ? 'home' : slug == 404 ? 'error' : slug}`, {
   version: isPreview() ? 'draft' : 'published',
   language,
   resolve_links: 'url',
   resolve_relations: 'page.canonical'
 })
+
+// const test = await storyblokApi.get(`cdn/stories/error`, {
+//   version: 'draft',
+//   resolve_links: 'url',
+//   resolve_relations: 'page.canonical'
+// })
+
+// console.log(test.data.stories)
 
 let story = data.story
 
