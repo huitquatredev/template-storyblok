@@ -24,7 +24,7 @@ async function fetchAndSaveRedirects() {
       console.log("No redirect found.");
     }
 
-    let content = "/* 404.html 404";
+    let content = "/* /404.html 404";
     content += "\n";
 
     // Download and save each redirect
