@@ -2,39 +2,53 @@
 import { useStoryblokApi } from '@storyblok/astro'
 import StoryblokComponent from '@storyblok/astro/StoryblokComponent.astro'
 import BaseLayout from '../layout/BaseLayout.astro'
-import parseUrl from '../utils/parseUrl'
 import isPreview from '../utils/isPreview'
 
 const storyblokApi = useStoryblokApi()
-const data = await storyblokApi.get(`cdn/stories/error`, {
-  version: 'draft',
+
+const allPages = await storyblokApi.get(`cdn/stories`, {
+  version: isPreview() ? 'draft' : 'published',
   resolve_links: 'url',
   resolve_relations: 'page.canonical'
 })
 
-let story = data.data.story
+const isErrorPage = allPages.data.stories.find((story) => story.slug === 'error')
+let story
 
-let first_image = true
-
-if (story.content.component != 'theme') {
-  story.content.body.map((item) => {
-    if (first_image) {
-      if ('image' in item) {
-        first_image = false
-        item.image.loading = 'eager'
-      }
-    }
+if (isErrorPage) {
+  const data = await storyblokApi.get(`cdn/stories/error`, {
+    version: isPreview() ? 'draft' : 'published',
+    resolve_links: 'url',
+    resolve_relations: 'page.canonical'
   })
+  story = data.data.story
+  let first_image = true
+
+  if (story.content.component != 'theme') {
+    story.content.body.map((item) => {
+      if (first_image) {
+        if ('image' in item) {
+          first_image = false
+          item.image.loading = 'eager'
+        }
+      }
+    })
+  }
 }
 ---
 
-<BaseLayout
-  title={story.content.title}
-  description={story.content.description}
-  canonical={story.content.canonical?.full_slug}
-  robots={story.content.robots}
-  ogImage={story.content.ogImage?.filename}
-  ogImageAlt={story.content.ogImage?.alt}
-  schema={story.content.schema}>
-  <StoryblokComponent blok={story.content} />
-</BaseLayout>
+{
+  story && (
+    <BaseLayout
+      title={story.content.title}
+      description={story.content.description}
+      canonical={story.content.canonical?.full_slug}
+      robots={story.content.robots}
+      ogImage={story.content.ogImage?.filename}
+      ogImageAlt={story.content.ogImage?.alt}
+      schema={story.content.schema}>
+      <StoryblokComponent blok={story.content} />
+    </BaseLayout>
+  )
+}
+{!story && <h1>Cette page n'existe pas</h1>}
