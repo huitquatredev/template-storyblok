@@ -8,6 +8,11 @@ const storyblokApi = new StoryblokClient({
   region: "eu", // Adjust region if needed
 });
 
+// [[redirects]]
+//   from = "/*"
+//   to = "404.html"
+//   status = 404
+
 async function fetchAndSaveRedirects() {
   try {
     // Fetch theme data from Storyblok
@@ -17,11 +22,12 @@ async function fetchAndSaveRedirects() {
 
     if (!data || data.length === 0) {
       console.log("No redirect found.");
-      return;
     }
 
+    let content = "/* 404.html 404";
+    content += "\n";
+
     // Download and save each redirect
-    let content = "";
     for (const redirect of data.story.content.redirects) {
       content += `${redirect.from} ${redirect.to} ${redirect.code ? redirect.code : "301"}${redirect.force ? "!" : ""}`;
       content += "\n";

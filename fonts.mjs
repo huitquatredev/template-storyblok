@@ -15,7 +15,6 @@ async function fetchAndSaveFonts() {
       version: "draft", // Use 'draft' for preview mode
     });
 
-    console.log(data.story.content);
     const fonts = data.story.content.fonts;
 
     if (!fonts || fonts.length === 0) {
