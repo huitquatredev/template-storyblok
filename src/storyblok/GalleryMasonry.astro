@@ -104,6 +104,18 @@ const { blok } = Astro.props
 </style>
 
 <script>
+  // let masonryGallery = document.getElementsByClassName('js-masonry')
+  // const observer = new IntersectionObserver(isVisible)
+  // function isVisible(entries, observer) {
+  //   entries.forEach((entry) => {
+  //     if (entry.isIntersecting) {
+  //       console.log('intersecting')
+  //       masonryGallery[0].dispatchEvent(new CustomEvent('masonry-reset'))
+  //       // observer.unobserve(entry.target)
+  //     }
+  //   })
+  // }
+  // observer.observe(masonryGallery[0])
   ;(function () {
     var Masonry = function (element) {
       this.element = element
@@ -233,11 +245,10 @@ const { blok } = Astro.props
             continue // broken image -> skip
           }
 
-          if (!imgs[i].complete) {
+          if (imgs[i].complete) {
             setTimeoutOn = true
             break
           } else if (typeof imgs[i].naturalHeight !== 'undefined' && imgs[i].naturalHeight == 0) {
-            setTimeoutOn = true
             break
           }
         }
