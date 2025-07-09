@@ -13,9 +13,18 @@ if (noremote) {
   newUrl = new URL('.netlify/images', Astro.site)
   newUrl.searchParams.set('url', src)
 
-  let meta = await probe(src)
-  width = meta.width
-  height = meta.height
+  try {
+    let meta = await probe(src)
+    width = meta.width
+    height = meta.height
+  } catch (error) {
+    width = 0
+    height = 0
+  }
+
+  // let meta = await probe(src)
+  // width = meta.width
+  // height = meta.height
 
   let urlw = new URL(newUrl)
   urlw.searchParams.set('w', '300')
