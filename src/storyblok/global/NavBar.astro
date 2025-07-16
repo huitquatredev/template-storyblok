@@ -12,12 +12,12 @@ const currentPath = Astro.url.pathname
       <a class="flex-none font-semibold text-xl focus:outline-hidden focus:opacity-80" href="/" aria-label={name}>
         {
           logo?.filename && logo.filename.endsWith('.svg') && (
-            <InlineSvg src={logo.filename} class="h-auto w-32 " innerclass="rounded-[var(--radius-box)] h-[90px]" />
+            <InlineSvg src={logo.filename} class="h-auto w-32 " innerclass="h-[100px] p-2" />
           )
         }
         {
           logo?.filename && !logo.filename.endsWith('.svg') && (
-            <NetlifyImage src={logo.filename} alt={name} class="h-auto w-32 max-h-full rounded-[var(--radius-box)]" />
+            <NetlifyImage src={logo.filename} alt={name} class="h-auto w-32 max-h-full" />
           )
         }
       </a>
