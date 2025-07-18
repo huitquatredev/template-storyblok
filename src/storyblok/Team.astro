@@ -3,6 +3,8 @@ import { storyblokEditable } from '@storyblok/astro'
 import RichText from './utils/RichText.astro'
 import NetlifyImage from './utils/NetlifyImage.astro'
 const { blok } = Astro.props
+
+console.log(blok.team[0].url)
 ---
 
 <section class="container" {...storyblokEditable(blok)}>
@@ -15,22 +17,44 @@ const { blok } = Astro.props
     {
       blok.team?.map((person, index) => (
         <li class="p-8" data-aos="fade-up" data-aos-duration={1000 + index * 500}>
-          <div class="flex flex-col gap-4">
-            {person.image?.filename && (
-              <NetlifyImage
-                src={person.image.filename}
-                alt={person.image.alt}
-                class="object-cover mx-auto rounded-[var(--radius-box)] size-full lg:size-20"
-                loading={person.image.loading === 'eager' ? 'eager' : 'lazy'}
-              />
-            )}
-            {(person.nom || person.fonction) && (
-              <footer class="mt-6">
-                {person.nom && <div class="font-semibold">{person.nom}</div>}
-                {person.fonction && <div class="text-sm text-base-content/95">{person.fonction}</div>}
-              </footer>
-            )}
-          </div>
+          {person.url && (
+            <a href={person.url.story.full_slug}>
+              <div class="flex flex-col gap-4">
+                {person.image?.filename && (
+                  <NetlifyImage
+                    src={person.image.filename}
+                    alt={person.image.alt}
+                    class="object-cover mx-auto rounded-[var(--radius-box)] size-full lg:size-20"
+                    loading={person.image.loading === 'eager' ? 'eager' : 'lazy'}
+                  />
+                )}
+                {(person.nom || person.fonction) && (
+                  <footer class="mt-6">
+                    {person.nom && <div class="font-semibold">{person.nom}</div>}
+                    {person.fonction && <div class="text-sm text-base-content/95">{person.fonction}</div>}
+                  </footer>
+                )}
+              </div>
+            </a>
+          )}
+          {!person.url && (
+            <div class="flex flex-col gap-4">
+              {person.image?.filename && (
+                <NetlifyImage
+                  src={person.image.filename}
+                  alt={person.image.alt}
+                  class="object-cover mx-auto rounded-[var(--radius-box)] size-full lg:size-20"
+                  loading={person.image.loading === 'eager' ? 'eager' : 'lazy'}
+                />
+              )}
+              {(person.nom || person.fonction) && (
+                <footer class="mt-6">
+                  {person.nom && <div class="font-semibold">{person.nom}</div>}
+                  {person.fonction && <div class="text-sm text-base-content/95">{person.fonction}</div>}
+                </footer>
+              )}
+            </div>
+          )}
         </li>
       ))
     }
