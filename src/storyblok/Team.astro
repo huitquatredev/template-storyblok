@@ -16,7 +16,7 @@ const { blok } = Astro.props
       blok.team?.map((person, index) => (
         <li class="p-8" data-aos="fade-up" data-aos-duration={1000 + index * 500}>
           {person.url && (
-            <a href={person.url?.story?.full_slug}>
+            <a href={'/' + person.url?.story?.full_slug}>
               <div class="flex flex-col gap-4">
                 {person.image?.filename && (
                   <NetlifyImage
