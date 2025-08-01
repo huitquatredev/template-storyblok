@@ -9,12 +9,16 @@ const { logo, name, slogan, menu } = Astro.props
   <aside>
     {
       logo?.filename && logo.filename.endsWith('.svg') && (
-        <InlineSvg src={logo.filename} innerclass="rounded-[var(--radius-box)]" class="h-auto w-32" />
+        <InlineSvg src={logo.filename} innerclass="rounded-[var(--radius-box)]" innerclass="h-auto max-h-32 w-32" />
       )
     }
     {
       logo?.filename && !logo.filename.endsWith('.svg') && (
-        <NetlifyImage src={logo.filename} alt={logo.alt} class="rounded-[var(--radius-box)] h-auto w-32" />
+        <NetlifyImage
+          src={logo.filename}
+          alt={logo.alt}
+          innerclass="rounded-[var(--radius-box)] h-auto max-h-32 w-32"
+        />
       )
     }
     <p>
