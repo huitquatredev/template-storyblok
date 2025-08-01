@@ -20,7 +20,7 @@ const { blok } = Astro.props
     <div class="flex flex-col card card-border rounded-[var(--radius-box)] p-4 sm:p-6 lg:p-8">
       <Heading tag={blok.formTag} classlist="mb-8 text-xl font-semibold" content={blok.formTitle} />
 
-      <form netlify name={Astro.url.pathname}>
+      <form netlify name={Astro.url.pathname} method="POST" data-success={blok.success}>
         <div class="grid gap-4 lg:gap-6">
           <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 lg:gap-6">
             <div>
@@ -105,3 +105,51 @@ const { blok } = Astro.props
   </div>
 </section>
 <!-- End Contact Us -->
+
+<script>
+  //FORM
+  const submitBtn = document.querySelector('form button[type="submit"]')
+  const formName = document.querySelector('form')
+
+  if (submitBtn) {
+    submitBtn.addEventListener('click', (event) => {
+      event.preventDefault()
+
+      //Check validity of the current slide
+      const inputs = formName.querySelectorAll('input')
+      let valid = true
+      inputs.forEach((input) => {
+        if (!input.checkValidity() && valid) {
+          input.reportValidity()
+          valid = false
+          return
+        }
+      })
+
+      if (valid) {
+        const message = document.querySelector('textarea')
+        if (!message.checkValidity()) {
+          message.reportValidity()
+          valid = false
+          return
+        }
+      }
+
+      if (valid) {
+        const success = formName.dataset.success
+        let formData = new FormData(formName)
+
+        fetch('/', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+          body: new URLSearchParams(formData).toString()
+        })
+          .then(() => {
+            alert(success)
+            formName.reset()
+          })
+          .catch((error) => alert(error))
+      }
+    })
+  }
+</script>
