@@ -20,7 +20,7 @@ const { blok } = Astro.props
     <div class="flex flex-col card card-border rounded-[var(--radius-box)] p-4 sm:p-6 lg:p-8">
       <Heading tag={blok.formTag} classlist="mb-8 text-xl font-semibold" content={blok.formTitle} />
 
-      <form>
+      <form netlify name={Astro.url.pathname}>
         <div class="grid gap-4 lg:gap-6">
           <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 lg:gap-6">
             <div>
