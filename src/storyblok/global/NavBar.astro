@@ -12,7 +12,7 @@ const currentPath = Astro.url.pathname
       <a class="flex-none font-semibold text-xl focus:outline-hidden focus:opacity-80" href="/" aria-label={name}>
         {
           logo?.filename && logo.filename.endsWith('.svg') && (
-            <InlineSvg src={logo.filename} class="h-auto w-32 " innerclass="h-[100px] p-2" />
+            <InlineSvg src={logo.filename} class="h-auto w-32 " innerclass="h-auto p-2" />
           )
         }
         {
@@ -68,7 +68,7 @@ const currentPath = Astro.url.pathname
 
     <div
       id="hs-header-base"
-      class="hs-collapse hidden overflow-hidden transition-all duration-300 basis-full grow md:block"
+      class="hs-collapse hidden overflow-hidden transition-all duration-300 basis-full grow md:block bg-base-100 relative z-50"
       aria-labelledby="hs-header-base-collapse">
       <div
         class="overflow-hidden overflow-y-auto max-h-[75vh] [&::-webkit-scrollbar]:w-2 [&::-webkit-scrollbar-thumb]:rounded-full [&::-webkit-scrollbar-track]:bg-base-content [&::-webkit-scrollbar-thumb]:bg-base-content">
