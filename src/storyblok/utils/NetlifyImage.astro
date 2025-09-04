@@ -2,13 +2,17 @@
 import probe from 'probe-image-size'
 import { FIRST, notFirstAnymore } from '../../utils/firstImage'
 
-let fetchpriorityValue
-FIRST ? (fetchpriorityValue = 'high') : (fetchpriorityValue = 'low')
-FIRST ? notFirstAnymore() : null
-
 const origin = Astro.url.origin
 
-const { src, alt, sizes = '100vw', class: classList, loading = 'lazy', noremote = false } = Astro.props
+const { src, alt, sizes = '100vw', class: classList, loading = 'lazy', noremote = false, skip = false } = Astro.props
+
+let fetchpriorityValue
+if (FIRST) {
+  fetchpriorityValue = 'high'
+  notFirstAnymore()
+} else {
+  fetchpriorityValue = 'low'
+}
 
 let url300, url723, url1080, url1560, url1920, url2048, newUrl, width, height, srcset
 

@@ -20,7 +20,7 @@ const currentPath = Astro.url.pathname
         }
         {
           logo?.filename && !logo.filename.endsWith('.svg') && (
-            <NetlifyImage src={logo.filename} alt={name} class="max-h-[90px] h-auto w-auto max-w-32" />
+            <NetlifyImage src={logo.filename} alt={name} class="max-h-[90px] h-auto w-auto max-w-32" skip="true" />
           )
         }
       </a>
