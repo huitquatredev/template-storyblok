@@ -7,7 +7,8 @@ const origin = Astro.url.origin
 const { src, alt, sizes = '100vw', class: classList, loading = 'lazy', noremote = false, skip = false } = Astro.props
 
 let fetchpriorityValue
-if (FIRST) {
+console.log(FIRST, skip, src)
+if (FIRST && !skip) {
   fetchpriorityValue = 'high'
   notFirstAnymore()
 } else {
