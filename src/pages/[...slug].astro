@@ -5,6 +5,7 @@ import BaseLayout from '../layout/BaseLayout.astro'
 import parseUrl from '../utils/parseUrl'
 import isPreview from '../utils/isPreview'
 import generateStaticPaths from '../utils/generateStaticPaths'
+import { newPage } from '../utils/firstImage'
 
 export async function getStaticPaths() {
   //We have moved all the code to a generateStaticPaths() function.
@@ -37,6 +38,8 @@ if (story.content.component != 'theme') {
     }
   })
 }
+
+newPage()
 ---
 
 <BaseLayout

@@ -1,5 +1,10 @@
 ---
 import probe from 'probe-image-size'
+import { FIRST, notFirstAnymore } from '../../utils/firstImage'
+
+let fetchpriorityValue
+FIRST ? (fetchpriorityValue = 'high') : (fetchpriorityValue = 'low')
+FIRST ? notFirstAnymore() : null
 
 const origin = Astro.url.origin
 
@@ -58,7 +63,7 @@ if (noremote) {
 }
 ---
 
-{noremote && <img src={newUrl} alt={alt} class={classList} loading={loading} />}
+{noremote && <img src={newUrl} alt={alt} class={classList} loading={loading} fetchpriority={fetchpriorityValue} />}
 {
   !noremote && src && (
     <img
@@ -70,6 +75,7 @@ if (noremote) {
       width={width}
       height={height}
       loading={loading}
+      fetchpriority={fetchpriorityValue}
     />
   )
 }
