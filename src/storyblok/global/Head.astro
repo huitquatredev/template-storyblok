@@ -9,7 +9,7 @@ import isPreview from '../../utils/isPreview'
 import { converter, formatCss } from 'culori'
 
 import '../../styles/tailwind.css'
-import '../../styles/aos.css'
+// import '../../styles/aos.css'
 import '../../styles/utils.css'
 
 const storyblokApi = useStoryblokApi()
@@ -141,6 +141,12 @@ const {
       />
     )
   }
+
+  <!-- Load AOS script asynchonously -->
+  <link rel="preload" as="style" onload="this.onload=null;this.rel='stylesheet'" href="aos.css" />
+  <noscript>
+    <link rel="stylesheet" href="aos.css" />
+  </noscript>
 
   <slot />
 </head>
