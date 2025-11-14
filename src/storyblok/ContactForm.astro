@@ -3,8 +3,11 @@ import { storyblokEditable } from '@storyblok/astro'
 import RichText from './utils/RichText.astro'
 import Heading from './utils/Heading.astro'
 const { blok } = Astro.props
+
+console.log(blok)
 ---
 
+<!-- prettier-ignore -->
 <section class="container" {...storyblokEditable(blok)} data-aos="fade-up">
   <div class="max-w-xl mx-auto">
     {
@@ -79,9 +82,7 @@ const { blok } = Astro.props
               id="message"
               name="message"
               rows="4"
-              class="text-accent py-2.5 sm:py-3 px-4 block w-full card card-border rounded-[var(--radius-field)] sm:text-sm focus:border-accent focus:ring-accent disabled:opacity-50 disabled:pointer-events-none">
-            </textarea>
-
+              class="text-accent py-2.5 sm:py-3 px-4 block w-full card card-border rounded-[var(--radius-field)] sm:text-sm focus:border-accent focus:ring-accent disabled:opacity-50 disabled:pointer-events-none"></textarea>
             <fieldset class="fieldset rounded-box">
               <label class="fieldset-label">
                 <input type="checkbox" class="checkbox checkbox-accent" required />
@@ -104,7 +105,9 @@ const { blok } = Astro.props
     </div>
   </div>
 </section>
-<!-- End Contact Us -->
+<!-
+<!---
+<!-- End Contact Us ---->
 
 <script>
   //FORM
